@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/add-city/<%= countryCode %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <input
+              type="text"
+              name="city_ar_name"
+              placeholder="اسم المدينة بالعربي"
+              required
+            />
+            <input
+              type="text"
+              name="city_en_name"
+              placeholder="اسم المدينة بالانجليزي"
+              required
+            />
+            <input type="submit" value="اضافة" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title%></title>
+    <link rel="icon" sizes="192x192" href="/assets/main/logo.svg" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    />
+    <link rel="stylesheet" href="/aan/css/all.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script>
+      let lang = `<%= lang %>`,
+        title = `<%= title %>`,
+        siteTitle = `<%= siteTitle%>`,
+        desc = `<%= desc %>`,
+        email = `<%= email %>`,
+        logoDist = `<%= logoDist %>`,
+        keyword = `<%= keyword %>`;
+    </script>
+    <script defer src="/aan/js/main.js"></script>
+    <script defer src="/js/script.js" type="module"></script>
+  </head>
+  <body>
+    <%- include('../partials/header.ejs') %>
+    <main>
+      <div
+        class="heading-container nm-container column justify-center align-center"
+      >
+        <div class="heading-incontainer sm-padding-container">
+          <h2 class="heading-title row justify-center align-center">
+            <%= title %>
+          </h2>
+        </div>
+      </div>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="row-container row justify-between wrap">
+            <% if(posts.length >= 1) { posts.forEach(post => { %>
+
+            <div class="post-show-div row nowrap justify-between align-center">
+              <div class="right-container column align-center justify-center">
+                التكرار
+
+                <p class="count-num"><%= post.postCount %></p>
+              </div>
+              <div class="left-container">
+                <div class="post-show-title"><%= post.title %></div>
+                <div class="post-show-content"><%= post.content %></div>
+              </div>
+            </div>
+
+            <%});}else{%>
+            <div class="msg">لا توجد بيانات - No Data Found</div>
+            <%}%>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+    <script>
+      // Apply More Options
+      let headerTitle = document.querySelector(".header-title h1"),
+        footerMail = document.querySelector(".footer-mail"),
+        siteCopyrights = document.querySelector(".site-copyrights");
+
+      document.title = title;
+      headerTitle.textContent = siteTitle;
+      footerMail.textContent = email;
+
+      lang == "en"
+        ? (siteCopyrights.textContent = `All Rights Reserved to ${siteTitle}`)
+        : (siteCopyrights.textContent = `جميع الحقوق محفوظة لدي موقع ${siteTitle}`);
+    </script>
+  </body>
+</html>

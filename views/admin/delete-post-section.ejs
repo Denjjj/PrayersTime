@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+
+          <div class="fluid-container">
+            <div class="country-container row wrap justify-start">
+              <% if(sections.length != 0) {sections.forEach(section=>{%>
+
+              <div class="country-item">
+                <a
+                  href="/admin/delete-post-section/<%= section.type %>/?delete=<%=section._id %>"
+                  ><b>حذف </b><%= section.title %></a
+                >
+              </div>
+
+              <% })}else{ %>
+              <div class="msg">لا توجد بيانات</div>
+              <%}%>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

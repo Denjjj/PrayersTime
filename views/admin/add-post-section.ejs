@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/add-post-section/<%= postTypeValue %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <input
+              type="text"
+              name="post_section_title"
+              placeholder="عنوان القسم"
+              required
+            />
+            <label>اللغة</label>
+            <select name="post_section_lang" class="select-box">
+              <option value="ar">عربي</option>
+              <option value="en">انجليزي</option>
+            </select>
+            <input type="submit" value="اضافة" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

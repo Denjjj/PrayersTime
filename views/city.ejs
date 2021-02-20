@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <script defer>
+    window.addEventListener("load", () => {
+      document.title = `<% if(lang == 'en') {%>Prayer Times In<%= cityLocaleName %> <%}else{%>مواقيت الصلاة في <%= cityLocaleName
+          %> <%}%>`;
+    });
+  </script>
+  <%- include('./partials/head.ejs') %>
+
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`,
+      userCountryName = `<%= countryName  %>`,
+      userCityName = `<%= cityName  %>`;
+  </script>
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <script defer src="/js/city.js" type="module"></script>
+    <script defer src="/js/search.js"></script>
+    <main>
+      <%- include('./partials/search.ejs') %>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="section-top-container column justify-between align-center">
+            <div class="section-heading">
+              <% if(lang == 'en') {%> Prayer Times In <%= cityLocaleName %>
+              <%}else{%> أوقات الصلاة في <%= cityLocaleName %> <%}%>
+            </div>
+            <div class="row justify-evenly fluid-width">
+                          <a href="/dhuha/<%= countryName %>/<%= cityName %>"> <% if(lang == 'en') {%> Dhuha Prayer <%}else{%> صلاة الضحي <%}%></a>
+            <a href="/istikharah/<%= countryName %>/<%= cityName %>"> <% if(lang == 'en') {%> Istikharah Prayer <%}else{%> صلاة الاستخارة <%}%></a>
+
+            </div>
+          </div>
+          <div
+            class="prayes-time-container row justify-center align-center nowrap"
+          >
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+          </div>
+
+          <div class="pray-item column justify-center align-center next-active-pray" id="18:29">
+              <div class="pray-name">-</div>
+              <div class="pray-remain-time">-</div>
+              <div class="pray-main-time">-</div>
+            </div>
+
+          <div
+            class="section-date-time nm-container row wrap justify-around <% if(lang == 'en') {%> align-end <%}%>"
+          >
+            <div class="date-item date-clock row-reverse">
+              <b>:الساعة</b>00:00 AM
+            </div>
+            <div class="date-item higri-date"><b>التاريخ الهجري:</b> -</div>
+            <div class="date-item goergian-date">
+              <b>التاريخ الميلادي:</b> -
+            </div>
+            <div class="date-item next-pray"><b>الصلاة القادمة:</b> -</div>
+            <div class="date-item timestamp-div row-reverse" <% if(lang == 'en') {%> style="direction: rtl;" <%}%> >
+              <b>:الفترة الزمنية</b> -
+            </div>
+          </div>
+          <div
+            class="section-bottom-container row justify-between align-center wrap"
+          >
+            <div class="section-options row justify-between align-center">
+              <div class="option-item more-option-btn">خيارات اضافية</div>
+              <a class="section-add-code option-item">تضمين الي موقعك</a>
+              <a
+                href="/month/<%= countryName  %>/<%= cityName  %><% if(lang == 'en'){ %>?lang=en<%}%>"
+                class="option-item month-prayes-btn"
+              >
+                مواقيت الصلاة للشهر
+              </a>
+            </div>
+            <div class="section-share-btns row">
+              <p class="share-tag">شارك</p>
+              <div class="share-sites row">
+                <a
+                  href="https://www.facebook.com/sharer/sharer.php?u="
+                  class="site row justify-center align-center facebook-site"
+                  ><i class="fab fa-facebook"></i></a
+                ><a
+                  href="https://twitter.com/share?url="
+                  class="site row justify-center align-center twitter-site"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+              </div>
+            </div>
+            <div class="more-option-data row justify-between fluid-container">
+              <div class="select-box">
+                <label>طريقة الحساب</label>
+                <select class="select pray-school">
+                  <option value="0" data-en="Shia Ithna-Ansari">
+                    اثنا اشهري
+                  </option>
+                  <option
+                    value="1"
+                    data-en="University of Islamic Sciences, Karachi"
+                  >
+                    جامعة العلوم الإسلامية ، كراتشي
+                  </option>
+                  <option value="2" data-en="Islamic Society of North America">
+                    الجمعية الإسلامية لأمريكا الشمالية
+                  </option>
+                  <option value="3" data-en="Muslim World League">
+                    رابطة العالم الإسلامي
+                  </option>
+                  <option
+                    selected
+                    value="4"
+                    data-en="Umm Al-Qura University, Makkah"
+                  >
+                    جامعة أم القرى ، مكة
+                  </option>
+                  <option
+                    value="5"
+                    data-en="Egyptian General Authority of Survey"
+                  >
+                    الهيئة المصرية العامة للمساحة
+                  </option>
+                  <option
+                    value="7"
+                    data-en="Institute of Geophysics, University of Tehran"
+                  >
+                    معهد الجيوفيزياء ، جامعة طهران
+                  </option>
+                  <option value="8" data-en="Gulf Region">الخليج</option>
+                  <option value="9" data-en="Kuwait">الكويت</option>
+                  <option value="10" data-en="Qatar">قطر</option>
+                  <option
+                    value="11"
+                    data-en="Majlis Ugama Islam Singapura, Singapore"
+                  >
+                    مجلس أوجاما إسلام سينجابورا ، سنغافورة
+                  </option>
+                  <option
+                    value="12"
+                    data-en="Union Organization islamic de France"
+                  >
+                    منظمة الاتحاد الإسلامية الفرنسية
+                  </option>
+                </select>
+              </div>
+              <div class="select-box">
+                <label>طريقة حساب العصر</label>
+                <select class="select pray-juristic">
+                  <option selected value="0" data-en="Shafi">شافعي</option>
+                  <option value="1" data-en="Hanafi">حنفي</option>
+                </select>
+              </div>
+              <div class="select-box">
+                <label>صيغة الوقت</label>
+                <select class="select pray-time-format">
+                  <option selected value="1" data-en="12 Hour">
+                    نظام 12 ساعة
+                  </option>
+                  <option value="0" data-en="24 Hours">نظام 24 ساعة</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="sm-padding-container">
+          <div class="section-top-container">
+            <div class="section-heading cities-heading">
+              <% if(lang == 'en') {%> Prayer Times In Other Cities In <%=
+              countryLocaleName %> <%}else{%> مواقيت الصلاة في مدن اخري في <%=
+              countryLocaleName %> <%}%>
+            </div>
+          </div>
+          <div class="city-container row wrap justify-start">
+            <%allcities.forEach(city=>{%>
+            <div class="city-item">
+              <a href="/<%= countryName %>/<%= city.en_name %>"
+                ><% if(lang == 'en'){ %><%= city.en_name %><%}else{%><%=
+                city.ar_name %><%}%></a
+              >
+            </div>
+            <%})%>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="fluid-width">
+        <label>الدولة</label>
+        <input
+          type="text"
+          list="manual-location-country"
+          class="fluid-width select-box country-search"
+        />
+        <datalist
+          class="fluid-width manual-location-country"
+          id="manual-location-country"
+        ></datalist>
+        <label>المدينة</label>
+        <select class="select-box fluid-width manual-location-city"></select>
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p class="alert-item row align-center justify-between manual-detect">
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

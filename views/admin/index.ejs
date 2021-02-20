@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <div class="data-month-year-show row nowrap align-center">
+            <label for="addMonthToUrl">الشهر</label>
+            <select id="addMonthToUrl" class="select-box"></select>
+            <label for="addYearToUrl">السنة</label>
+            <select id="addYearToUrl" class="select-box"></select>
+          </div>
+          <div class="data-count-container row justify-between wrap">
+            <div class="data-count-item column align-center justify-center">
+              <p class="count-item-head">زيارات المدن</p>
+              <div class="count-item-num"><%= citiesViewsCount%></div>
+            </div>
+            <div class="data-count-item column align-center justify-center">
+              <p class="count-item-head">زيارات المواضيع</p>
+              <div class="count-item-num"><%= postsViewsCount%></div>
+            </div>
+            <div class="data-count-item column align-center justify-center">
+              <p class="count-item-head">زيارات الأدعية</p>
+              <div class="count-item-num"><%= doaasViewsCount%></div>
+            </div>
+            <div class="data-count-item column align-center justify-center">
+              <p class="count-item-head">زيارات الأذكار</p>
+              <div class="count-item-num"><%= azkarsViewsCount%></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head.ejs') %>
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`;
+  </script>
+  <script defer src="/js/month.js" type="module"></script>
+  <body>
+    <header><%- include('./partials/header.ejs') %></header>
+    <div class="header-space"></div>
+    <main>
+      <div
+        class="heading-container nm-container column justify-center align-center"
+      >
+        <div class="heading-incontainer sm-padding-container">
+          <h2 class="heading-title row justify-center align-center">
+            ---------------
+          </h2>
+        </div>
+      </div>
+      <div class="nm-container">
+        <section class="sm-padding-container" style="overflow: auto">
+          <table style="overflow: auto">
+            <thead>
+              <tr>
+                <% if(lang == 'en') {%>
+                <td>Date</td>
+                <td>Higri</td>
+                <td>Today</td>
+                <td>Fajr</td>
+                <td>Sunrise</td>
+                <td>Duhr</td>
+                <td>Asr</td>
+                <td>Maghrib</td>
+                <td>Isha</td>
+                <% } else{ %>
+                <td>التاريخ</td>
+                <td>هجري</td>
+                <td>اليوم</td>
+                <td>الفجر</td>
+                <td>الشروق</td>
+                <td>الظهر</td>
+                <td>العصر</td>
+                <td>المغرب</td>
+                <td>العشاء</td>
+                <% } %>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div
+            class="section-action row justify-center align-center"
+            style="margin-top: 20px"
+          >
+            <% if(lang == 'en') {%>
+            <a class="print-month-prayes-table"
+              >Click Ctrl + P to Print Table</a
+            >
+            <% } else{ %>
+            <a class="print-month-prayes-table"
+              >اضغط علي Ctrl + P لطباعة الجدول</a
+            >
+            <% } %>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p
+          class="alert-item row align-center justify-between"
+          id="manual-location"
+        >
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

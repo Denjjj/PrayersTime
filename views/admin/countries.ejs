@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+          <div class="fluid-container row justify-between wrap">
+            <a
+              href="/admin/add-country/"
+              class="add-post-btn row align-center justify-center"
+              >اضافة بلد</a
+            >
+            <div>
+              <input
+                type="text"
+                list="manual-location-country"
+                class="select-box country-search"
+                placeholder="ابحث عن الدولة"
+                id="search-country"
+              />
+              <datalist
+                class="fluid-width manual-location-country"
+                id="manual-location-country"
+              >
+                <% if(countries.length != 0) {countries.forEach(country=>{%>
+
+                <option value="<%= country.countryCode %>">
+                  <%= country.ar_name %>
+                </option>
+
+                <% })}%>
+              </datalist>
+            </div>
+          </div>
+          <div class="fluid-container">
+            <div class="country-container row wrap justify-start">
+              <% if(countries.length != 0) {countries.forEach(country=>{%>
+
+              <div class="country-item">
+                <a href="/admin/country/<%=country.countryCode %>"
+                  ><%=country.ar_name %></a
+                >
+              </div>
+
+              <% })}else{ %>
+              <div class="msg">لا توجد بيانات</div>
+              <%}%>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      document
+        .querySelector("#search-country")
+        .addEventListener("change", () => {
+          location.href = `${location.origin}/admin/country/${
+            document.querySelector("#search-country").value
+          }`;
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link
+    rel="icon"
+    sizes="192x192"
+    href="<%=  logoDist.replace('/public','') %>"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&amp;display=swap"
+  />
+  <meta name="description" content="<%= desc %>" />
+
+  <script>
+    var url = location.href;
+  </script>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description" content="<%= desc %>" />
+  <meta property="og:image" content="<%=  logoDist.replace('/public','') %>" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="<%= title %>" />
+  <meta property="twitter:description" content="<%= desc %>" />
+  <meta
+    property="twitter:image"
+    content="<%=  logoDist.replace('/public','') %>"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+  />
+  <link rel="stylesheet" href="/aan/css/all.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script>
+    let userData = '<%= JSON.stringify(getLocation) %>_"';
+    userData = JSON.parse(userData.replace('_"', "").replace(/&#34;/g, '"'));
+  </script>
+  <script defer src="/aan/js/main.js"></script>
+  <script defer src="/js/script.js" type="module"></script>
+</head>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`;
+    siteTitle = `<%= siteTitle%>`;
+  </script>
+  <script>
+    let params = "<%= JSON.stringify(params) %>";
+    params = params
+      .replace(/&#34;/g, '"')
+      .replace(/\&#34;/g, '"')
+      .substr(1)
+      .slice(0, -1);
+
+    let userData = JSON.parse(params);
+  </script>
+  <%- include('../partials/head.ejs') %>
+  <body>
+    <%- include('../partials/header.ejs') %>
+
+    <main>
+      <div
+        class="heading-container nm-container column justify-center align-center"
+      >
+        <div class="heading-incontainer sm-padding-container">
+          <h2 class="heading-title row justify-center align-center">
+            تضمين مواقيت الصلاة في موقعك
+          </h2>
+        </div>
+      </div>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div
+            class="heading-container fluid-container column justify-center align-center no-margin"
+          >
+            <div
+              class="heading-incontainer fluid-container justify-center align-center half-padding"
+            >
+              <%if(lang=='en'){%>First Code<%}else{%>الشكل الأول<%}%>
+            </div>
+          </div>
+          <div class="embed-container row justify-center wrap">
+            <div class="left-container">
+              <iframe
+                src="/widget/4/0/0/<%= cityName %>/<%= countryName %>"
+                frameborder="0"
+                scroll="none"
+                width="270"
+                height="290"
+              ></iframe>
+            </div>
+            <div class="bottom-container fluid-container">
+              <div class="more-option-data row justify-between fluid-container">
+                <div class="select-box method">
+                  <label>طريقة الحساب</label>
+                  <select class="select pray-school method-select">
+                    <option value="0" data-en="Shia Ithna-Ansari">
+                      اثنا اشهري
+                    </option>
+                    <option
+                      value="1"
+                      data-en="University of Islamic Sciences, Karachi"
+                    >
+                      جامعة العلوم الإسلامية ، كراتشي
+                    </option>
+                    <option
+                      value="2"
+                      data-en="Islamic Society of North America"
+                    >
+                      الجمعية الإسلامية لأمريكا الشمالية
+                    </option>
+                    <option value="3" data-en="Muslim World League">
+                      رابطة العالم الإسلامي
+                    </option>
+                    <option
+                      selected
+                      value="4"
+                      data-en="Umm Al-Qura University, Makkah"
+                    >
+                      جامعة أم القرى ، مكة
+                    </option>
+                    <option
+                      value="5"
+                      data-en="Egyptian General Authority of Survey"
+                    >
+                      الهيئة المصرية العامة للمساحة
+                    </option>
+                    <option
+                      value="7"
+                      data-en="Institute of Geophysics, University of Tehran"
+                    >
+                      معهد الجيوفيزياء ، جامعة طهران
+                    </option>
+                    <option value="8" data-en="Gulf Region">الخليج</option>
+                    <option value="9" data-en="Kuwait">الكويت</option>
+                    <option value="10" data-en="Qatar">قطر</option>
+                    <option
+                      value="11"
+                      data-en="Majlis Ugama Islam Singapura, Singapore"
+                    >
+                      مجلس أوجاما إسلام سينجابورا ، سنغافورة
+                    </option>
+                    <option
+                      value="12"
+                      data-en="Union Organization islamic de France"
+                    >
+                      منظمة الاتحاد الإسلامية الفرنسية
+                    </option>
+                  </select>
+                </div>
+                <div class="select-box school">
+                  <label>طريقة حساب العصر</label>
+                  <select class="select school-select">
+                    <option selected value="0" data-en="Shafi">شافعي</option>
+                    <option value="1" data-en="Hanafi">حنفي</option>
+                  </select>
+                </div>
+                <div class="select-box timeformat">
+                  <label>صيغة الوقت</label>
+                  <select class="select pray-time-format timeformat-select">
+                    <option selected value="1" data-en="12 Hour">
+                      نظام 12 ساعة
+                    </option>
+                    <option value="0" data-en="24 Hours">نظام 24 ساعة</option>
+                  </select>
+                </div>
+              </div>
+              <pre>
+                <div class="pre-head"><%if(lang=='en'){%>First Code<%}else{%>كود الشكل الأول<%}%></div><code data-height='290'><% if(lang == 'en') {%>Choose Options To Generate Code<%}else{%>قم بتغيير الاعدادات لكي يظهر الكود<%}%></code></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div
+            class="heading-container fluid-container column justify-center align-center no-margin"
+          >
+            <div
+              class="heading-incontainer fluid-container justify-center align-center half-padding"
+            >
+              <%if(lang=='en'){%>Second Code<%}else{%>الشكل الثاني<%}%>
+            </div>
+          </div>
+          <div class="embed-container row justify-center wrap">
+            <div class="left-container">
+              <iframe
+                src="/widget-long/4/0/0/<%= cityName %>/<%= countryName %>"
+                frameborder="0"
+                scroll="none"
+                width="480"
+                height="615"
+              ></iframe>
+            </div>
+            <div class="bottom-container fluid-container">
+              <div class="more-option-data row justify-between fluid-container">
+                <div class="select-box method">
+                  <label>طريقة الحساب</label>
+                  <select class="select pray-school method-select">
+                    <option value="0" data-en="Shia Ithna-Ansari">
+                      اثنا اشهري
+                    </option>
+                    <option
+                      value="1"
+                      data-en="University of Islamic Sciences, Karachi"
+                    >
+                      جامعة العلوم الإسلامية ، كراتشي
+                    </option>
+                    <option
+                      value="2"
+                      data-en="Islamic Society of North America"
+                    >
+                      الجمعية الإسلامية لأمريكا الشمالية
+                    </option>
+                    <option value="3" data-en="Muslim World League">
+                      رابطة العالم الإسلامي
+                    </option>
+                    <option
+                      selected
+                      value="4"
+                      data-en="Umm Al-Qura University, Makkah"
+                    >
+                      جامعة أم القرى ، مكة
+                    </option>
+                    <option
+                      value="5"
+                      data-en="Egyptian General Authority of Survey"
+                    >
+                      الهيئة المصرية العامة للمساحة
+                    </option>
+                    <option
+                      value="7"
+                      data-en="Institute of Geophysics, University of Tehran"
+                    >
+                      معهد الجيوفيزياء ، جامعة طهران
+                    </option>
+                    <option value="8" data-en="Gulf Region">الخليج</option>
+                    <option value="9" data-en="Kuwait">الكويت</option>
+                    <option value="10" data-en="Qatar">قطر</option>
+                    <option
+                      value="11"
+                      data-en="Majlis Ugama Islam Singapura, Singapore"
+                    >
+                      مجلس أوجاما إسلام سينجابورا ، سنغافورة
+                    </option>
+                    <option
+                      value="12"
+                      data-en="Union Organization islamic de France"
+                    >
+                      منظمة الاتحاد الإسلامية الفرنسية
+                    </option>
+                  </select>
+                </div>
+                <div class="select-box school">
+                  <label>طريقة حساب العصر</label>
+                  <select class="select school-select">
+                    <option selected value="0" data-en="Shafi">شافعي</option>
+                    <option value="1" data-en="Hanafi">حنفي</option>
+                  </select>
+                </div>
+                <div class="select-box timeformat">
+                  <label>صيغة الوقت</label>
+                  <select class="select pray-time-format timeformat-select">
+                    <option selected value="1" data-en="12 Hour">
+                      نظام 12 ساعة
+                    </option>
+                    <option value="0" data-en="24 Hours">نظام 24 ساعة</option>
+                  </select>
+                </div>
+              </div>
+              <pre>
+                <div class="pre-head"><%if(lang=='en'){%>Second Code<%}else{%>كود الشكل الثاني<%}%></div><code data-height='615'><% if(lang == 'en') {%>Choose Options To Generate Code<%}else{%>قم بتغيير الاعدادات لكي يظهر الكود<%}%></code></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p
+          class="alert-item row align-center justify-between"
+          id="manual-location"
+        >
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+    <script>
+      // Apply More Options
+      let headerTitle = document.querySelector(".header-title h1"),
+        footerMail = document.querySelector(".footer-mail"),
+        siteCopyrights = document.querySelector(".site-copyrights"),
+        headingTitle = document.querySelector(".heading-title");
+
+      document.title = title;
+      headingTitle.textContent = `تضمين مواقيت الصلاة في موقعك`;
+      headerTitle.textContent = siteTitle;
+      footerMail.textContent = email;
+      if (lang == "en") {
+        document.querySelector(
+          ".more-option-data"
+        ).firstElementChild.firstElementChild.textContent =
+          "Calculation Method";
+        document.querySelector(
+          ".more-option-data"
+        ).firstElementChild.nextElementSibling.firstElementChild.textContent =
+          "School";
+        document.querySelector(
+          ".more-option-data"
+        ).lastElementChild.firstElementChild.textContent = "Time Format";
+      }
+      lang == "en"
+        ? ((siteCopyrights.textContent = `All Rights Reserved to ${siteTitle}`),
+          (headingTitle.textContent = `Embed prayer times in your site`))
+        : (siteCopyrights.textContent = `جميع الحقوق محفوظة لدي موقع ${siteTitle}`);
+      let allEnData = document.querySelectorAll("option");
+      allEnData.forEach((option) => {
+        if (option.getAttribute("data-en") != null) {
+          console.log(option.getAttribute("data-en"));
+          option.textContent = option.getAttribute("data-en");
+        }
+      });
+    </script>
+  </body>
+</html>

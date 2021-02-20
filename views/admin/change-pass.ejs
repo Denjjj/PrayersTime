@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تغيير كلمة السر</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/aan/css/all.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer>
+      addEventListener("load", () => {
+        let showPassBtn = document.getElementById("showPass");
+
+        showPassBtn.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (showPassBtn.checked == true) {
+              showPassBtn.parentNode.previousElementSibling.type = "text";
+            } else {
+              showPassBtn.parentNode.previousElementSibling.type = "password";
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="fluid-container fluid-form row align-center justify-center">
+      <form
+        action="/admin/change-pass"
+        name="body"
+        method="POST"
+        class="login-form"
+      >
+        <h2>تغيير كلمة السر</h2>
+        <% if(errMsg !== '') { %>
+        <div class="error-msg"><%= errMsg %></div>
+        <% }%>
+        <input
+          type="password"
+          name="password"
+          placeholder="كلمة السر الحالية"
+          required
+        />
+        <div class="showPassBox row align-center">
+          <label for="showPass">اظهار كلمة السر</label>
+          <input type="checkbox" id="showPass" />
+        </div>
+        <input
+          type="password"
+          name="new_password"
+          pattern="=(?=.*[a-z]).{8,}"
+          placeholder="كلمة السر الجديدة"
+          required
+        />
+        <div class="showPassBox row align-center">
+          <label for="showPass">اظهار كلمة السر</label>
+          <input type="checkbox" id="showPass" />
+        </div>
+        <input type="submit" value="تغيير كلمة السر" />
+      </form>
+    </div>
+  </body>
+</html>

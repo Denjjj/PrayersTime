@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/edit-duha/<%= postCustom %>"
+            name="body"
+            method="POST"
+          >
+            <h2>تعديل صلاة <%= postCustomAr %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <label>اللغة العربية</label>
+            <textarea placeholder="محتوي المنشور" name="post_ar_content">
+<%= postData[0].content%></textarea
+            >
+            <label>اللغة الانجليزية</label>
+            <textarea placeholder="محتوي المنشور" name="post_en_content">
+<%= postData[1].content%></textarea
+            >
+            <input type="submit" value="تعديل" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

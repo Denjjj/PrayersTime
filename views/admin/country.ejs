@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+          <div class="fluid-container row justify-between wrap">
+            <a
+              href="/admin/add-city/<%= countryCode %>"
+              class="add-post-btn row align-center justify-center"
+              >اضافة مدينة</a
+            >
+            <div class="row justify-center align-center">
+              <input
+                type="text"
+                list="manual-location-country"
+                class="select-box country-search"
+                placeholder="ابحث عن مدينة"
+                style="margin: 0px; margin-left: 10px"
+                id="search-cities"
+              />
+              <datalist
+                class="fluid-width manual-location-country"
+                id="manual-location-country"
+              >
+                <% if(cities.length != 0) {cities.forEach(city=>{%>
+
+                <option value="<%= city.en_name %>"><%= city.ar_name %></option>
+
+                <% })}%>
+              </datalist>
+              <a
+                href="/admin/delete-country/<%= countryCode %>"
+                class="add-post-btn row align-center justify-center"
+                >حذف</a
+              >
+            </div>
+          </div>
+          <div class="fluid-container">
+            <div class="country-container row wrap justify-start">
+              <% if(cities.length != 0) {cities.forEach(city=>{%>
+
+              <div class="country-item">
+                <a href="/admin/city/<%=city._id %>"><%=city.ar_name %></a>
+              </div>
+
+              <% })}else{ %>
+              <div class="msg">لا توجد بيانات</div>
+              <%}%>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      document
+        .querySelector("#search-cities")
+        .addEventListener("change", () => {
+          location.href = `${location.origin}/admin/redtocity/${
+            document.querySelector("#search-cities").value
+          }`;
+        });
+    </script>
+  </body>
+</html>

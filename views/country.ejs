@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head.ejs') %>
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`;
+  </script>
+  <body>
+    <%- include('./partials/header.ejs') %>    
+    <script defer src="/js/search.js"></script>
+    <!-- <script defer src="/js/app.js" type="module"></script> -->
+    <main>
+      <%- include('./partials/search.ejs') %>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="section-top-container">
+            <div class="section-heading" <% if(lang == 'en') {%> style="text-align: left" <%}%>><%= heading %></div>
+          </div>
+          <div class="countries-container row wrap justify-between">
+            <%if(cities.length != 0) { cities.forEach(city => { %>
+
+            <div class="country-item">
+              <a href="/<%= countryEnName %>/<%=city.en_name %>"><% if(lang == 'en') {%><%= city.en_name %><%}else{%><%= city.ar_name %><%}%></a>
+            </div>
+
+            <% });}else{%>
+            <div class="msg backTohome">العودة للرئيسية - Back To Home</div>
+            <%}%>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="fluid-width">
+        <label>الدولة</label>
+        <input
+          type="text"
+          list="manual-location-country"
+          class="fluid-width select-box country-search"
+        />
+        <datalist
+          class="fluid-width manual-location-country"
+          id="manual-location-country"
+        ></datalist>
+        <label>المدينة</label>
+        <select class="select-box fluid-width manual-location-city"></select>
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p class="alert-item row align-center justify-between manual-detect">
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

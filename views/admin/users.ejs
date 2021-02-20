@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+          <div class="fluid-container row justify-start wrap">
+            <a
+              href="/admin/add-user"
+              class="add-post-btn row align-center justify-center"
+              >اضافة عضو</a
+            >
+
+         <% if(users.length != 0) {%>
+          <table>
+            <thead>
+              <tr>
+                <td>الأسم</td>
+                <td>ادارة</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user => { %>
+              <tr>
+                <td>
+                 <%= user.username %>
+                </td>
+                <td>
+                  <a href="/admin/edit-user/<%= user._id %>"
+                    >تعديل</a
+                  >
+<% if(user.role != 0) {%>
+                  <a href="/admin/delete-user/<%= user._id %>"
+                    >حذف</a
+                  >
+<%}%>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% }else{ %>
+          <div class="msg">لا توجد بيانات</div>
+          <%}%>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

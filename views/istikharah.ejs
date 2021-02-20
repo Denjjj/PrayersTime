@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`;
+    siteTitle = `<%= siteTitle%>`;
+  </script>
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
+    <main>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="row-container row justify-between wrap">
+            <div
+              class="post-only-div column nowrap justify-center align-center"
+            >
+              <div class="post-show-title">
+                <% if(lang == 'en') {%>Istikharah Prayer<%}else{%>صلاة
+                الاستخارة<%}%>
+              </div>
+              <div class="post-show-content">
+                <%= content.content %>
+                <a
+                  href="/<%= countryName %>/<%= cityName %><%if(lang == 'en'){%>?lang='en'<%}%>"
+                  class="green-btn"
+                  ><%if(lang == 'en'){%>To Know the Time of Prayers Click
+                  Here<%}else{%>لمعرفة مواقيت الصلاة من هنا<%}%></a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p
+          class="alert-item row align-center justify-between"
+          id="manual-location"
+        >
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+    <script>
+      // Apply More Options
+      let headerTitle = document.querySelector(".header-title h1"),
+        footerMail = document.querySelector(".footer-mail"),
+        siteCopyrights = document.querySelector(".site-copyrights");
+
+      document.title = title;
+      headerTitle.textContent = siteTitle;
+      footerMail.textContent = email;
+
+      lang == "en"
+        ? ((siteCopyrights.textContent = `All Rights Reserved to ${siteTitle}`),
+          (headingTitle.textContent = `Embed prayer times in your site`))
+        : (siteCopyrights.textContent = `جميع الحقوق محفوظة لدي موقع ${siteTitle}`);
+    </script>
+  </body>
+</html>

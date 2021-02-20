@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/settings"
+            name="body"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <div class="row wrap align-center">
+              <label style="margin-left: 10px">صورة الموقع</label>
+              <img
+                src="<%= settings[0].logoDist.replace('/public','') %>"
+                alt="siteImg"
+                width="45px"
+                height="50px"
+              />
+              <div style="height: 10px" class="fluid-width"></div>
+              <input type="file" name="imgUpload" />
+              <div style="height: 20px" class="fluid-width"></div>
+            </div>
+            <fieldset>
+              <legend>اللغة العربية</legend>
+              <label>اسم الموقع</label>
+              <input
+                type="text"
+                name="siteTitle"
+                placeholder="اسم الموقع"
+                value="<%= settings[0].siteTitle %>"
+                required
+              />
+              <label>وصف الموقع</label>
+              <textarea name="siteDesc" placeholder="وصف الموقع">
+<%= settings[0].siteDesc %></textarea
+              >
+              <label>كلمات الموقع المفتاحية</label>
+              <input
+                type="text"
+                name="siteKeywords"
+                placeholder="كلمات الموقع المفتاحية"
+                value="<%= settings[0].siteKeywords %>"
+                required
+              />
+              <label>ايميل الموقع</label>
+              <input
+                type="email"
+                name="siteEmail"
+                placeholder="ايميل الموقع"
+                value="<%= settings[0].siteEmail %>"
+                required
+              /><input
+                type="hidden"
+                name="settingslogoDist"
+                value="<%= settings[0].logoDist%>"
+              />
+              <input
+                type="hidden"
+                name="settingsId"
+                value="<%= settings[0]._id%>"
+              />
+            </fieldset>
+            <fieldset>
+              <legend>English</legend>
+              <label>Site Name</label>
+              <input
+                type="text"
+                name="siteEnTitle"
+                placeholder="Site Name"
+                value="<%= settings[1].siteTitle %>"
+                required
+              />
+              <label>Site Description</label>
+              <textarea name="siteEnDesc" placeholder="Site Description">
+<%= settings[1].siteDesc %>
+              </textarea>
+              <label>Keywords</label>
+              <input
+                type="text"
+                name="siteEnKeywords"
+                placeholder="Keywords"
+                value="<%= settings[1].siteKeywords %>"
+                required
+              />
+              <label>Site Email</label>
+              <input
+                type="email"
+                name="siteEnEmail"
+                placeholder="Site Email"
+                value="<%= settings[1].siteEmail %>"
+                required
+              /><input
+                type="hidden"
+                name="settingsEnlogoDist"
+                value="<%= settings[0].logoDist%>"
+              />
+              <input
+                type="hidden"
+                name="settingsEnId"
+                value="<%= settings[1]._id%>"
+              />
+            </fieldset>
+            <input type="submit" value="تعديل الاعدادات" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

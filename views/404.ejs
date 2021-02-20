@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <script>
+      let lang = `<%= lang %>`,
+        title = `<%= title %>`,
+        desc = `<%= desc %>`,
+        email = `<%= email %>`,
+        logoDist = `<%= logoDist %>`,
+        keyword = `<%= keyword %>`;
+    </script>
+
+    <main>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="error-404-container column align-center justify-center">
+            <div class="big-text">404</div>
+            <div class="alt-text">
+              <% if(lang == 'en'){ %>This page does not exist, or you are not
+              allowed to enter this link<%}else{%>هذه الصفحة غير موجودة , او غير
+              مسموح لك بالدخول لهذا الرابط<%}%>
+            </div>
+            <div class="to-home-btn row align-center justify-center">
+              <% if(lang == 'en'){ %>Home Page<%}else{%>الرجوع للرئيسية<%}%>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="fluid-width">
+        <label>الدولة</label>
+        <input
+          type="text"
+          list="manual-location-country"
+          class="fluid-width select-box country-search"
+        />
+        <datalist
+          class="fluid-width manual-location-country"
+          id="manual-location-country"
+        ></datalist>
+        <label>المدينة</label>
+        <select class="select-box fluid-width manual-location-city"></select>
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p class="alert-item row align-center justify-between manual-detect">
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector(".to-home-btn").addEventListener("click", () => {
+        location.href = location.origin;
+      });
+    </script>
+  </body>
+</html>

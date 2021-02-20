@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/add-post/<%= postTypeValue %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%> <input type="text" name="post_title" <%if(postTypeValue == 0
+            || postTypeValue == 1){%> placeholder="محتوي الذكر او الدعاء"
+            <%}else{%> placeholder="عنوان المنشور" <%}%> required />
+            <textarea
+                      <%if(postTypeValue == 0 || postTypeValue == 1 ){ %> 
+            placeholder="احاديث او فضل للذكر او الدعاء" <%}
+            else{%> placeholder="محتوي المنشور" <%}%>
+              name="post_content"
+              required
+            ></textarea>
+            <% if(postTypeValue == 0 || postTypeValue == 1){%>
+            <input
+              type="text"
+              name="post_count"
+              placeholder="عدد التكرار"
+              required
+            /><%}%> <% if(postTypeValue == 0 || postTypeValue == 1 &&
+            postSections.length != 0){ %>
+            <label>القسم</label>
+            <select name="post_section" class="select-box">
+              <% postSections.forEach(section => { %>
+              <option value="<%= section._id %>"><%= section.title %></option>
+              <% });%></select
+            ><br />
+            <%}else if(postTypeValue == 0 || postTypeValue == 1) {%>
+            <label>لا توجد اقسام</label>
+            <a
+              href="/admin/add-post-section/<%= postTypeValue %>"
+              class="add-post-btn row align-center justify-center"
+              style="
+                margin-bottom: 10px;
+                width: fit-content;
+                font-size: var(--sm-font);
+                font-weight: 400;
+              "
+              >اضافة قسم جديد</a
+            >
+            <%}%>
+            <label>اللغة</label>
+            <select name="post_lang" class="select-box">
+              <option value="ar">عربي</option>
+              <option value="en">انجليزي</option>
+            </select>
+            <input type="submit" value="اضافة" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

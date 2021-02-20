@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/add-country"
+            name="body"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <label style="margin-left: 10px">علم الدولة</label>
+            <input type="file" name="countryFlag" required />
+            <input
+              type="text"
+              name="country_code"
+              placeholder="كود الدولة ISO2"
+              required
+            />
+            <input
+              type="text"
+              name="country_ar_name"
+              placeholder="اسم الدولة بالعربي"
+              required
+            />
+            <input
+              type="text"
+              name="country_en_name"
+              placeholder="اسم الدولة بالانجليزي"
+              required
+            />
+            <input type="submit" value="اضافة" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

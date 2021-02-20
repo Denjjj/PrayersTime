@@ -1,0 +1,96 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="icon" sizes="192x192" href="/assets/main/logo.svg" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&amp;display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+  />
+  <link rel="stylesheet" href="/aan/css/all.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="module">
+    import { $, $_ } from "../../aan/js/main.js";
+
+    let header = $("header"),
+      headerTitle = $(".header-title"),
+      ul = $("nav ul"),
+      navToggle = $(".navbar-toggle");
+
+    addEventListener("scroll", () => {
+      scrollY > 200
+        ? (header.style.height = "80px")
+        : (header.style.height = "114px");
+    });
+
+    headerTitle.addEventListener("click", () => {
+      location.href = location.origin;
+    });
+
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.contains("fa-bars")
+        ? ((ul.style.display = `unset`), (ul.style.opacity = `1`))
+        : ((ul.style.opacity = `0`), (ul.style.display = `none`)),
+        navToggle.classList.toggle("fa-times"),
+        navToggle.classList.toggle("fa-bars");
+    });
+  </script>
+  <script>
+    window.addEventListener("load", () => {
+      let addMonthToUrl = document.querySelector("#addMonthToUrl"),
+        addYearToUrl = document.querySelector("#addYearToUrl");
+
+      addMonthToUrl.innerHTML = "";
+
+      if (location.search != "") {
+        for (let i = 1; i <= 12; i++) {
+          if (i == parseInt(location.search.split("=")[1])) {
+            addMonthToUrl.innerHTML += `<option selected value="${i}">${i}</option>`;
+            continue;
+          }
+          addMonthToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+      } else {
+        for (let i = 1; i <= 12; i++) {
+          if (i == new Date().getMonth() + 1) {
+            addMonthToUrl.innerHTML += `<option selected value="${i}">${i}</option>`;
+            continue;
+          }
+          addMonthToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+        addYearToUrl.innerHTML = "";
+      }
+
+      if (location.search != "" && location.search.split("=")[2] != undefined) {
+        for (let i = 2019; i <= new Date().getFullYear(); i++) {
+          if (i == parseInt(location.search.split("=")[2])) {
+            addYearToUrl.innerHTML += `<option selected value="${parseInt(
+              location.search.split("=")[2]
+            )}">${parseInt(location.search.split("=")[2])}</option>`;
+            continue;
+          }
+          addYearToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+      } else {
+        for (let i = 2019; i <= new Date().getFullYear(); i++) {
+          if (i == new Date().getFullYear()) {
+            addYearToUrl.innerHTML += `<option selected value="${i}">${i}</option>`;
+            continue;
+          }
+          addYearToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+      }
+
+      addMonthToUrl.addEventListener("change", () => {
+        location.href = `${location.origin}${location.pathname}?month=${addMonthToUrl.value}&year=${addYearToUrl.value}`;
+      });
+      addYearToUrl.addEventListener("change", () => {
+        location.href = `${location.origin}${location.pathname}?month=${addMonthToUrl.value}&year=${addYearToUrl.value}`;
+      });
+    });
+  </script>
+</head>

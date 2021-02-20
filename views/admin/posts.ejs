@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <script>
+    window.addEventListener("load", () => {
+      let addMonthToUrl = document.querySelector("#addMonthToUrl"),
+        addYearToUrl = document.querySelector("#addYearToUrl");
+
+      addMonthToUrl.innerHTML = "";
+      for (let i = 1; i <= 12; i++) {
+        if (i == new Date().getMonth() + 1) {
+          addMonthToUrl.innerHTML += `<option selected value="${i}">${i}</option>`;
+          continue;
+        }
+        addMonthToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+      }
+      addYearToUrl.innerHTML = "";
+      for (let i = 2019; i <= new Date().getFullYear(); i++) {
+        if (i == new Date().getFullYear()) {
+          addYearToUrl.innerHTML += `<option selected value="${i}">${i}</option>`;
+          continue;
+        }
+        addYearToUrl.innerHTML += `<option value="${i}">${i}</option>`;
+      }
+
+      addMonthToUrl.addEventListener("change", () => {
+        location.href = `${location.href}?month=${addMonthToUrl.value}&year=${addYearToUrl.value}`;
+      });
+      addYearToUrl.addEventListener("change", () => {
+        location.href = `${location.href}?month=${addMonthToUrl.value}&year=${addYearToUrl.value}`;
+      });
+    });
+  </script>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+          <div class="data-month-year-show row nowrap align-center">
+            <label for="addMonthToUrl">الشهر</label>
+            <select id="addMonthToUrl" class="select-box"></select>
+            <label for="addYearToUrl">السنة</label>
+            <select id="addYearToUrl" class="select-box"></select>
+          </div>
+          <div class="fluid-container row justify-start wrap">
+            <a
+              href="/admin/add-post/<%= postTypeValue %>"
+              class="add-post-btn row align-center justify-center"
+              >اضافة جديدة</a
+            >
+
+            <% if(postTypeValue == 0 || postTypeValue == 1){ %>
+            <a
+              href="/admin/add-post-section/<%= postTypeValue %>"
+              class="add-post-btn row align-center justify-center"
+              >اضافة قسم <%=postTypeName%></a
+            >
+            <a
+              href="/admin/delete-post-section/<%= postTypeValue %>"
+              class="add-post-btn row align-center justify-center"
+              >حذف قسم <%=postTypeName%></a
+            >
+          </div>
+          <%}%>
+          <% if(postTypeValue == 2){ %>
+            <a
+              href="/admin/edit-duha/duha"
+              class="add-post-btn row align-center justify-center"
+              >تعديل الضحي</a
+            ><a
+              href="/admin/edit-duha/istikharah"
+              class="add-post-btn row align-center justify-center"
+              >تعديل الاستخارة</a
+            >
+            <%}%>
+          <% if(posts.length != 0) {%>
+          <table>
+            <thead>
+              <tr>
+                <td>العنوان</td>
+                                </td>
+<% if(postTypeValue == 0 || postTypeValue == 1) {%>
+                <td>القسم</td>
+<%}%>
+                <td>ادارة</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% for( let i = 0;i<posts.length;i++ ) {
+                let post = posts[i] %>
+              <tr>
+                <td>
+                  <% if(post.type == 0 || post.type == 1) {%>
+                  <a href="/post/show/<%= post.type %>/<%= post.postSection%>"><%= post.title %></a>
+                  <%}else{%>
+                  <a href="/post/t/<%= post._id %>"><%= post.title %></a>
+                  <%}%>
+                </td>
+<% if(postTypeValue == 0 || postTypeValue == 1) {%>
+                <td>
+                  <%= postSectionNames[post.postSection] %>
+                </td>
+<%}%>
+                <td>
+                  <a href="/admin/edit-post/<%= post.type %>/<%= post._id %>"
+                    >تعديل</a
+                  >
+                  <a href="/admin/delete-post/<%= post.type %>/<%= post._id %>"
+                    >حذف</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <% }else{ %>
+          <div class="msg">لا توجد بيانات</div>
+          <%}%>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

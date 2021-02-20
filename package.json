@@ -1,0 +1,43 @@
+{
+  "name": "prayes",
+  "version": "1.0.0",
+  "description": "an app for pryes times",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --experimental-modules index.js",
+    "build": "babel ./controllers ./public ./routers ./views ./models index.js --out-dir ./build",
+    "cache": "npm cache verify"
+  },
+  "author": "ahmed fawzy",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cities.json": "^1.1.5",
+    "cookie-session": "^1.4.0",
+    "country-code-lookup": "0.0.18",
+    "country-codes-list": "^1.6.8",
+    "country-list": "^2.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "geoip-country": "^4.0.45",
+    "geoip-lite": "^1.4.2",
+    "geoip-lite-updated": "^1.4.2",
+    "jsdom": "^16.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.13",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
+    "password-hash": "^1.2.2",
+    "pug": "^3.0.0",
+    "request-ip": "^2.1.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "nodemon": "^2.0.6"
+  }
+}

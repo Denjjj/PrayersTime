@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="icon" sizes="192x192" href="/assets/main/logo.svg" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    />
+    <script>
+      let lang = `<%= lang %>`,
+        title = `<%= title %>`,
+        desc = `<%= desc %>`,
+        email = `<%= email %>`,
+        logoDist = `<%= logoDist %>`,
+        keyword = `<%= keyword %>`;
+    </script>
+    <link rel="stylesheet" href="/aan/css/all.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <script>
+    let params = "<%= JSON.stringify(params) %>";
+    params = params
+      .replace(/&#34;/g, '"')
+      .replace(/\&#34;/g, '"')
+      .substr(1)
+      .slice(0, -1);
+
+    let userData = JSON.parse(params);
+  </script>
+  <style>
+    .pray-item {
+      display: none;
+    }
+    .active-pray {
+      background-color: var(--elements-background-color);
+      color: #333333;
+    }
+  </style>
+  <body>
+    <script defer src="/js/widget.js" type="module"></script>
+    <main>
+      <div
+        class="fluid-container"
+        style="background-color: #607d8b; color: #ffffff"
+      >
+        <section class="fluid-container">
+          <div class="section-top-container row justify-between align-center">
+            <div class="section-heading" style="color: #ffffff">
+              أوقات الصلاة في -
+            </div>
+            <p class="manual-location-btn" style="color: #ffffff">
+              <% if(params.lang == 'ar') {%> تحديد يدوي للموقع<%}else{%> Choose
+              Location <% } %>
+            </p>
+          </div>
+          <div
+            class="prayes-time-container row justify-center align-center nowrap"
+          >
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+            <div class="pray-item no-resize column justify-center align-center">
+              <div class="pray-name">
+                <p>متبقي علي صلاة</p>
+                ____
+              </div>
+              <div class="pray-remain-time">00:00</div>
+              <div class="pray-main-time">00:00</div>
+            </div>
+          </div>
+          <% if(params.lang == 'ar') {%>
+          <div class="section-date-time nm-container row wrap justify-around">
+            <div
+              class="date-item date-clock row-reverse"
+              style="color: #ffffff"
+            >
+              <b style="color: #333333">:الساعة</b>00:00 AM
+            </div>
+            <div class="date-item higri-date" style="color: #ffffff">
+              <b style="color: #333333">التاريخ الهجري:</b> -
+            </div>
+            <div class="date-item goergian-date" style="color: #ffffff">
+              <b style="color: #333333">التاريخ الميلادي:</b> -
+            </div>
+          </div>
+          <%}else{%> <% }%>
+        </section>
+      </div>
+    </main>
+    <div class="alert-container">
+      <div class="alert-text">
+        <% if(params.lang == 'ar') {%> برجاء تفعيل امكانية الوصول للموقع GPS
+        لعرض مواقيت الصلاة اوتوماتيكيا <%}else{%> Please enable GPS access to
+        display prayer times automatically Or Select it Manually<% } %>
+      </div>
+      <div class="fluid-width">
+        <label>
+          <% if(params.lang == 'ar') {%> الدولة<%}else{%> Country<% } %></label
+        >
+        <select class="select-box fluid-width manual-location-country"></select>
+        <label
+          ><% if(params.lang == 'ar') {%> المدينة<%}else{%> City<% } %></label
+        >
+        <select class="select-box fluid-width manual-location-city"></select>
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i><% if(params.lang == 'ar') {%>
+          اغلاق<%}else{%> Close<% } %>
+        </p>
+        <p class="alert-item row align-center justify-between manual-detect">
+          <% if(params.lang == 'ar') {%> تحديد يدوي<%}else{%> Manually Detect <%
+          } %>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

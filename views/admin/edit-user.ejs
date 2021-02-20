@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/edit-user/<%= userId %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <input
+              type="text"
+              name="user_name"
+              placeholder="اسم العضو"
+              value="<%= userData.username %>"
+              required
+            />
+            <input
+              type="email"
+              name="user_mail"
+              placeholder="ايميل العضو"
+              value="<%= userData.email %>"
+              required
+            />
+            <label>الوظيفة</label>
+            <select name="user_role" class="select-box">
+              <% if(userData.role == '0'){ %>
+              <option selected value="0">مدير</option>
+              <option value="1">محرر</option>
+              <%}else{%>
+              <option value="0">مدير</option>
+              <option selected value="1">محرر</option>
+              <%}%>
+            </select>
+            <input type="submit" value="تعديل العضو" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

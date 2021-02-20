@@ -1,0 +1,30 @@
+<div class="search-container">
+  <div class="nm-container column justify-center align-center">
+    <h2 class="search-heading txt-center"><%= desc %></h2>
+
+    <div class="column fluid-width manual-container">
+      <input class="manual-location-btn fluid-width <% if(lang == 'en')
+      {%>row-reverse <%}else{%>row <%}%>search-box justify-between align-center"
+      <% if(lang == 'en') {%> style="text-align: left" <%}%> placeholder="<%
+      if(lang == 'en') { %>Search a City Name<% }else {%>ابحث عن اسم مدينة<%}%>"
+      >
+      <i
+        class="fas fa-street-view detect-location"
+        <% if(lang == 'en') {%> style="right: 10px;" <%}%> 
+        title="تحديد موقعي - Detect My Location"
+      ></i>
+      <div class="autoComleteSearch"></div>
+    </div>
+  </div>
+</div>
+<script>
+  let detectLocation = document.querySelector(".detect-location");
+
+  detectLocation.addEventListener("click", () => {
+    if (lang == "en") {
+    location.href = `${location.origin}/detect?lang=en`;
+  }else{
+        location.href = `${location.origin}/detect`;
+  }
+  });
+</script>

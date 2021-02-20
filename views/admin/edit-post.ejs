@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/edit-post/<%= postTypeValue %>/<%= postId %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <input type="text" name="post_title" 
+            <%if(postTypeValue == 0 || postTypeValue == 1){%>
+               placeholder="محتوي الذكر او الدعاء"
+            <%}else{%>
+               placeholder="عنوان المنشور" 
+               <%}%> 
+              value="<%= postData.title%>" required />
+            <textarea 
+            <%if(postTypeValue == 0 || postTypeValue == 1 ){ %> 
+            placeholder="احاديث او فضل للذكر او الدعاء" <%}
+            else{%> placeholder="محتوي المنشور" <%}%>
+             value="<%= postData.title%>" name="post_content" required>
+<%= postData.content%>
+</textarea>
+<%if(postTypeValue == 0 || postTypeValue == 1 ){ %> 
+            <input
+              type="text"
+              name="post_count"
+              placeholder="عدد التكرار"
+              required
+              value="<%= postData.postCount%>"
+            />
+<%}%>
+            <input type="submit" value="تعديل" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

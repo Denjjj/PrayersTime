@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+          <% if(errMsg !== '') { %>
+          <div class="error-msg"><%= errMsg %></div>
+          <% }%>
+          <div class="fluid-container row justify-between wrap">
+            <a
+              href="/admin/delete-city/<%= city._id %>"
+              class="add-post-btn row align-center justify-center"
+              >حذف</a
+            >
+          </div>
+          <div class="fluid-container">
+            <div class="country-container row wrap justify-start">
+              <form
+                class="no-rl-padding"
+                action="/admin/city/<%= city._id %>"
+                method="post"
+                name="body"
+              >
+                <input
+                  type="hidden"
+                  name="cityCountryCode"
+                  value="<%=city.countryCode %>"
+                />
+                <% if(city.length != 0) {%>
+                <label>الاسم بالعربي</label>
+                <input
+                  type="text"
+                  class="country-item fluid-container"
+                  name="city_ar_name"
+                  value="<%=city.ar_name %>"
+                  placeholder="الاسم بالعربي"
+                />
+                <label>الاسم بالانجليزي</label>
+                <input
+                  type="text"
+                  class="country-item fluid-container"
+                  name="city_en_name"
+                  value="<%=city.en_name %>"
+                  placeholder="الاسم بالانجليزي"
+                />
+                <input type="submit" value="تعديل" />
+                <% }else{ %>
+                <div class="msg">لا توجد بيانات</div>
+                <%}%>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
