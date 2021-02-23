@@ -24,6 +24,14 @@ const requestIp = require("request-ip");
 
 const app = express();
 
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 // MongoDB
 
 const url = `mongodb+srv://aanpc:Zalamoka@prayes.vqnds.mongodb.net/prayes-site?retryWrites=true&w=majority`,

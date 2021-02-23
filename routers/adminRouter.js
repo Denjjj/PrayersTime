@@ -1,5 +1,4 @@
 const express = require("express");
-const session = require("cookie-session");
 const View = require("../models/view.js");
 const {
   isLogged,
@@ -48,14 +47,6 @@ const upload = require("express-fileupload");
 const router = express.Router();
 
 router.use(upload());
-
-router.use(
-  session({
-    secret: "secret-key",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 router.get("/admin", (req, res) => {
   res.redirect("/admin/dashboard");

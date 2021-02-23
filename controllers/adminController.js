@@ -1,15 +1,14 @@
 const pkg = require("password-hash");
 const { generate, verify } = pkg;
 const User = require("../models/user.js");
-const session = require("cookie-session");
 
 const strip_tags = (inp) => {
   return inp.replace(/(<([^>]+)>)/gi, "");
 };
 
-// Check If There is A Session
+// Check If There is A req.session
 const isLogged = (req, res) => {
-  if (session.userName != undefined && req.url.includes("admin")) {
+  if (req.session.userName != undefined && req.url.includes("admin")) {
     if (req.url.includes("login")) {
       res.redirect("/admin/dashboard", { title: "لوحة التحكم" });
     }
@@ -22,12 +21,12 @@ const isLogged = (req, res) => {
 
 const isAdmin = async (req, res) => {
   let value = "";
-  User.find({ username: session.userName, role: 0 }).then((results) => {
+  User.find({ username: req.session.userName, role: 0 }).then((results) => {
     if (results.length > 0) {
       value = true;
     } else {
       value = false;
-      session.userName = undefined;
+      req.session.userName = undefined;
       res.redirect("/admin/dashboard");
     }
     return value;
@@ -41,7 +40,7 @@ const login = (req, res) => {
   User.find({ username: userName })
     .then((result) => {
       if (verify(password, result[0].password)) {
-        session.userName = result[0].username;
+        req.session.userName = result[0].username;
         res.redirect("/admin/dashboard");
       } else {
         res.render("admin/login", { errMsg: "هناك خطأ في كلمة سر المستخدم" });
@@ -53,7 +52,7 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  session.userName = undefined;
+  req.session.userName = undefined;
 
   res.redirect("/admin/login");
 };
@@ -64,7 +63,7 @@ const changePass = (req, res) => {
   let password = strip_tags(req.body.password.replace(/ /g, "")),
     newPassword = generate(strip_tags(req.body.new_password.replace(/ /g, "")));
 
-  User.find({ username: session.userName })
+  User.find({ username: req.session.userName })
     .then((result) => {
       if (verify(password, result[0].password)) {
         let newPass = {
@@ -81,7 +80,7 @@ const changePass = (req, res) => {
             })
             .then(() => {
               setTimeout(() => {
-                session.userName = undefined;
+                req.session.userName = undefined;
                 res.redirect("/admin/login");
               }, 1000);
             });
@@ -93,7 +92,7 @@ const changePass = (req, res) => {
       }
     })
     .catch(() => {
-      session.userName = undefined;
+      req.session.userName = undefined;
       isLogged(req, res);
 
       res.render("admin/change-pass", {
