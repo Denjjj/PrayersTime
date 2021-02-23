@@ -3,7 +3,6 @@ const { generate, verify } = pkg;
 const User = require("../models/user.js");
 const mongoose = require("mongoose");
 const { isLogged, isAdmin } = require("./adminController.js");
-const session = require("cookie-session");
 const City = require("../models/city.js");
 const Country = require("../models/country.js");
 
