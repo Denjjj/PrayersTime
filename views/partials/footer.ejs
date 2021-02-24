@@ -5,8 +5,17 @@
   <div class="footer-copyrights">
     <div class="nm-container row-reverse justify-between align-center">
       <div class="site-copyrights fluid-width">
-        <% if(lang == 'en') {%> All Rights Reserved to <%= title %> <%}else{%>
-        جميع الحقوق محفوظة لدي موقع <%= title %> <%}%>
+        <% if(lang == 'en') {%> All Rights Reserved to <%= title %>
+        <a
+          href="/privacy-policy"
+          style="text-decoration: underline; font-weight: bold"
+          >Privacy Policy</a
+        ><%}else{%> جميع الحقوق محفوظة لدي موقع <%= title %> <%}%>
+        <a
+          href="/privacy-policy"
+          style="text-decoration: underline; font-weight: bold"
+          >سياسة الخصوصية</a
+        >
       </div>
     </div>
   </div>

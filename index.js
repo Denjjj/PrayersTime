@@ -498,6 +498,27 @@ app.get("/istikharah/:countryname/:cityname", (req, res) => {
     });
 });
 
+// Privacy Policy
+app.get("/privacy-policy", (req, res) => {
+  let langQuery = req.query.lang || "ar";
+
+  settings
+    .find({ lang: langQuery })
+    .then((results) => results[0])
+    .then((results) => {
+      res.render("privacy-policy", {
+        lang: langQuery,
+        title: results.siteTitle,
+        siteTitle: results.siteTitle,
+        desc: results.siteDesc,
+        email: results.siteEmail,
+        logoDist: results.logoDist,
+        keyword: results.siteKeywords,
+        getLocation: userData,
+      });
+    });
+});
+
 app.use((req, res) => {
   let langQuery = req.query.lang || "ar";
 
