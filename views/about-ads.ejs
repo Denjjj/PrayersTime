@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <script>
+    let lang = `<%= lang %>`,
+      title = `<%= title %>`,
+      desc = `<%= desc %>`,
+      email = `<%= email %>`,
+      logoDist = `<%= logoDist %>`,
+      keyword = `<%= keyword %>`;
+    siteTitle = `<%= siteTitle%>`;
+  </script>
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
+    <main>
+      <div class="nm-container">
+        <section class="sm-padding-container">
+          <div class="row-container row justify-between wrap">
+            <div
+              class="post-only-div column nowrap justify-center align-center"
+            >
+              <div class="post-show-title">
+                <% if(lang == 'en') {%>An explanation of the types of ads that
+                appear to you <%}else{%>توضيح حول انواع الاعلانات التي تظهر لك
+                <%}%>
+              </div>
+              <div
+                class="post-show-content"
+                style="text-align:  <% if(lang == 'en') {%>left<%}else{%>right<%}%>"
+              >
+                <% if(lang == 'en') {%>
+                <p>
+                  <br />
+                  <font
+                    _mstmutation="1"
+                    _msthash="417924"
+                    _msttexthash="220648883"
+                    ><b _mstmutation="1" _istranslated="1"
+                      >The appearance of advertisements on the site and its
+                      type</b
+                    >
+                    <br _mstmutation="1" _istranslated="1" />
+                    <br _mstmutation="1" _istranslated="1" />dear visitor, The
+                    type of advertising that appears to you to have an ything to
+                    us, we are dealing with Google Advertising Company which in
+                    <br _mstmutation="1" _istranslated="1" />turn shows the ad
+                    according to your visits and impression of you, for example
+                    when you search for computer products you will notice most
+                    of the ads are for computers and so on, so the ads these are
+                    different from person to person and we have no hand in
+                    determining their type through this link you will find
+                    Google tell you on what basis do you show these ads a
+                    <a
+                      href="https://support.google.com/adsense/answer/9713?hl=ar&amp;ref_topic=1628432"
+                      target="_blank"
+                      title="سياسة اظهار الاعلانات وانواعها"
+                      _mstmutation="1"
+                      _istranslated="1"
+                      >policy of showing ads and types,</a
+                    >
+                    and through the page above attached can control the types of
+                    advertising thank you to you
+                    <br _mstmutation="1" _istranslated="1" /> </font
+                  ><br />
+                </p>
+                <%}else{%>
+                <p>
+                  <br />
+                  <b>ظهور الاعلانات على الموقع ونوعها</b><br />
+                  <br />عزيزي الزائر, نوع الاعلان الذي يظهر لك لادخل لنا به ,
+                  نحن نتعامل مع شركة قوقل للاعلانات والتي بدورها تظهر الاعلان
+                  حسب زياراتك وانطباعها عنك, فمثلاً عند بحثك عن منتجات
+                  الكمبيوترات ستلاحظ اغلب الاعلانات هي للكمبيوترات وهكذا, لذا
+                  فان الاعلانات هذه تختلف من شخص لاخر وليس لدينا اي يد في تحديد
+                  نوعها <br />من خلال هذا الرابط ستجدل قوقل تخبرك على اي اساس
+                  تقوم باظهار هذه الاعلانات
+                  <a
+                    href="https://support.google.com/adsense/answer/9713?hl=ar&amp;ref_topic=1628432"
+                    target="_blank"
+                    title="سياسة اظهار الاعلانات وانواعها"
+                    >سياسة اظهار الاعلانات وانواعها</a
+                  >
+                  , ومن خلال الصفحة المرفقة فوق تستطيع ان تتحكم في انواع
+                  الاعلانات التي تظهر لك <br />شكراً لكم <br />
+                </p>
+                <%}%>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+    <div class="alert-container">
+      <div class="alert-text">
+        برجاء تفعيل امكانية الوصول للموقع GPS لعرض مواقيت الصلاة اوتوماتيكيا
+      </div>
+      <div class="alert-btns row">
+        <p class="alert-item row align-center justify-between" id="close-alert">
+          <i class="fas fa-times"> </i>اغلاق
+        </p>
+        <p
+          class="alert-item row align-center justify-between"
+          id="manual-location"
+        >
+          تحديد يدوي
+        </p>
+      </div>
+    </div>
+    <script>
+      // Apply More Options
+      let headerTitle = document.querySelector(".header-title h1"),
+        footerMail = document.querySelector(".footer-mail"),
+        siteCopyrights = document.querySelector(".site-copyrights");
+
+      document.title = title;
+      headerTitle.textContent = siteTitle;
+      footerMail.textContent = email;
+
+      lang == "en"
+        ? ((siteCopyrights.textContent = `All Rights Reserved to ${siteTitle}`),
+          (headingTitle.textContent = `Embed prayer times in your site`))
+        : (siteCopyrights.textContent = `جميع الحقوق محفوظة لدي موقع ${siteTitle}`);
+    </script>
+  </body>
+</html>
