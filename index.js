@@ -63,39 +63,37 @@ app.use(requestIp.mw());
 // Get User Data
 let userData = {},
   userIp = "",
-  backUserData = {},
-  userDataFunc = (req, res, next) => {
-    app.use(function (req, res) {
-      const ip = req.clientIp;
-      res.end(ip);
+  backUserData = {};
 
-      if (ip == "::1" || ip == "::ffff:127.0.0.1") {
-        ip = "45.242.76.121";
-      }
+app.use(function (req, res, next) {
+  let ip = req.clientIp;
 
-      let countryCode = lookup(ip).country,
-        cityName = lookup(ip).city,
-        lati = lookup(ip).ll[0],
-        long = lookup(ip).ll[1],
-        capitalCity = lookup(ip).timezone.split("/")[1];
+  if (ip == "::1" || ip == "::ffff:127.0.0.1") {
+    ip = "45.242.76.121";
+  }
 
-      userData = {
-        ipAddress: ip,
-        countryCode: countryCode,
-        countryName: getName(countryCode),
-        cityName: cityName,
-        longitude: long,
-        latitude: lati,
-        capitalCity,
-      };
-      backUserData = userData;
-      userData = JSON.stringify(userData);
-      userIp = ip;
-    });
-    next();
+  let countryCode = lookup(ip).country,
+    cityName = lookup(ip).city,
+    lati = lookup(ip).ll[0],
+    long = lookup(ip).ll[1],
+    capitalCity = lookup(ip).timezone.split("/")[1];
+
+  userData = {
+    ipAddress: ip,
+    countryCode: countryCode,
+    countryName: getName(countryCode),
+    cityName: cityName,
+    longitude: long,
+    latitude: lati,
+    capitalCity,
   };
+  backUserData = userData;
 
-app.use(userDataFunc);
+  userData = JSON.stringify(userData);
+  userIp = ip;
+
+  next();
+});
 
 // Render Home Page
 app.get("/detect", (req, res) => {
