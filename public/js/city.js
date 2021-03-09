@@ -446,7 +446,11 @@ window.addEventListener("load", () => {
           nextPrayItem.classList.add("active-pray");
           nextPrayTime = nextPrayItem.getAttribute("id");
 
-          countdownTimer(nextPrayItem, nextPrayTime);
+          let nextPrayText = $(".nextPrayText");
+
+          console.log(nextPrayItem);
+
+          nextPrayText.textContent = nextPrayItem.firstElementChild.textContent;
 
           nextPrayItem.firstElementChild.nextElementSibling.innerHTML ==
           "موعد الاذان"

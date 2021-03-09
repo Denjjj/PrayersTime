@@ -56,7 +56,9 @@ body {
   margin: 0px;
   padding: 0px;
   direction: rtl;
-  font-family: "Tajawal", "Segoe UI", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Tajawal", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
   background-color: var(--secondary-background-color);
 }
 
@@ -136,7 +138,7 @@ header {
   height: 114px;
   background-color: var(--primary-background-color);
   -webkit-box-shadow: 0px 5px 10px #01302705;
-          box-shadow: 0px 5px 10px #01302705;
+  box-shadow: 0px 5px 10px #01302705;
   -webkit-transition: height 0.3s;
   transition: height 0.3s;
   z-index: 9999;
@@ -233,8 +235,8 @@ header nav .ul li:last-of-type {
     left: 50px;
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
-        -ms-flex-direction: column !important;
-            flex-direction: column !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
     display: none;
     opacity: 0;
     padding: 10px;
@@ -308,7 +310,7 @@ main .heading-container .heading-incontainer.half-padding {
 
 main .search-container {
   width: 100%;
-  height: 260px;
+  height: 200px;
   background-color: var(--primary-green);
   background-image: url("../assets/main/header_background.png");
   background-size: cover;
@@ -442,11 +444,11 @@ main section .section-top-container .section-heading {
   main section .section-top-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   main section .section-top-container .section-heading {
-    font-size: calc(var(--lg-font) - calc(0.1 * var(--lg-font)));
+    font-size: calc(var(--lg-font) - calc(0.3 * var(--lg-font)));
   }
 }
 
@@ -518,21 +520,29 @@ main section .prayes-time-container .pray-item .pray-main-time {
   main section .prayes-time-container .pray-item:not(.no-resize) {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
-        -ms-flex-flow: row !important;
-            flex-flow: row !important;
+    -ms-flex-flow: row !important;
+    flex-flow: row !important;
     -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
     width: 100% !important;
     height: 40px !important;
   }
   main section .prayes-time-container .pray-item:not(.no-resize) .pray-name {
     font-size: var(--nm-font);
   }
-  main section .prayes-time-container .pray-item:not(.no-resize) .pray-remain-time {
+  main
+    section
+    .prayes-time-container
+    .pray-item:not(.no-resize)
+    .pray-remain-time {
     font-size: var(--md-font);
   }
-  main section .prayes-time-container .pray-item:not(.no-resize) .pray-main-time {
+  main
+    section
+    .prayes-time-container
+    .pray-item:not(.no-resize)
+    .pray-main-time {
     font-size: var(--md-font);
   }
 }
@@ -541,10 +551,10 @@ main section .prayes-time-container .pray-item .pray-main-time {
   main section .prayes-time-container {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
   }
   main section .prayes-time-container .pray-item {
     margin-bottom: 10px;
@@ -618,25 +628,25 @@ main section .section-date-time .date-item:last-of-type {
 
 main section .section-date-time.align-end {
   -webkit-box-pack: end !important;
-      -ms-flex-pack: end !important;
-          justify-content: flex-end !important;
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
   -webkit-box-align: end !important;
-      -ms-flex-align: end !important;
-          align-items: flex-end !important;
+  -ms-flex-align: end !important;
+  align-items: flex-end !important;
 }
 
 @media (max-width: 650px) {
   main section .section-date-time {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
     -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
   }
 }
 
@@ -691,14 +701,18 @@ main section .section-bottom-container .more-option-data .select-box .select {
   main section .section-bottom-container .more-option-data {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   main section .section-bottom-container .more-option-data .select-box {
     margin-bottom: 10px;
     width: 100%;
   }
-  main section .section-bottom-container .more-option-data .select-box:last-of-type {
+  main
+    section
+    .section-bottom-container
+    .more-option-data
+    .select-box:last-of-type {
     margin-bottom: 0px;
   }
 }
@@ -727,11 +741,21 @@ main section .section-bottom-container .section-share-btns .share-sites a.site {
   border-radius: var(--md-border-radius);
 }
 
-main section .section-bottom-container .section-share-btns .share-sites a.site.facebook-site {
+main
+  section
+  .section-bottom-container
+  .section-share-btns
+  .share-sites
+  a.site.facebook-site {
   background-color: #4363a3;
 }
 
-main section .section-bottom-container .section-share-btns .share-sites a.site.twitter-site {
+main
+  section
+  .section-bottom-container
+  .section-share-btns
+  .share-sites
+  a.site.twitter-site {
   background-color: #3fbff5;
 }
 
@@ -739,16 +763,16 @@ main section .section-bottom-container .section-share-btns .share-sites a.site.t
   main section .section-bottom-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
   main section .section-bottom-container .section-options {
     width: 100%;
     margin-bottom: 10px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
   main section .section-bottom-container .section-options .option-item {
     margin-bottom: 10px;
@@ -800,7 +824,7 @@ main .row-container .row-item {
 @media (max-width: 768px) {
   main .row-container {
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 }
 
@@ -818,7 +842,12 @@ main .embed-container .right-container .options-container .option {
   color: var(--primary-text-color);
 }
 
-main .embed-container .right-container .options-container .option input[type="checkbox"] {
+main
+  .embed-container
+  .right-container
+  .options-container
+  .option
+  input[type="checkbox"] {
   margin: 5px;
   width: 20px;
   height: 20px;
@@ -839,11 +868,22 @@ main .embed-container .right-container .colors-container .color .color-item {
   margin-bottom: 10px;
 }
 
-main .embed-container .right-container .colors-container .color .color-item:last-of-type {
+main
+  .embed-container
+  .right-container
+  .colors-container
+  .color
+  .color-item:last-of-type {
   margin-bottom: 0px;
 }
 
-main .embed-container .right-container .colors-container .color .color-item .color-data {
+main
+  .embed-container
+  .right-container
+  .colors-container
+  .color
+  .color-item
+  .color-data {
   margin-right: 10px;
   padding: 2px 5px;
   width: 110px;
@@ -851,14 +891,28 @@ main .embed-container .right-container .colors-container .color .color-item .col
   border-radius: var(--sm-border-radius);
 }
 
-main .embed-container .right-container .colors-container .color .color-item .color-data .colorValue {
+main
+  .embed-container
+  .right-container
+  .colors-container
+  .color
+  .color-item
+  .color-data
+  .colorValue {
   font-size: calc(var(--sm-font) + 2px);
   font-weight: 400;
   color: var(--primary-text-color);
   direction: ltr;
 }
 
-main .embed-container .right-container .colors-container .color .color-item .color-data input[type="color"] {
+main
+  .embed-container
+  .right-container
+  .colors-container
+  .color
+  .color-item
+  .color-data
+  input[type="color"] {
   margin-right: 5px;
   padding: 0px;
   width: 30px;
@@ -873,8 +927,8 @@ main .embed-container .right-container .colors-container .color .color-item .col
     width: calc(100% - 40px) !important;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   main .embed-container .right-container .options-container {
     width: 100%;
@@ -925,14 +979,18 @@ main .embed-container .bottom-container .more-option-data .select-box .select {
   main .embed-container .bottom-container .more-option-data {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
   main .embed-container .bottom-container .more-option-data .select-box {
     margin-bottom: 10px;
     width: 100%;
   }
-  main .embed-container .bottom-container .more-option-data .select-box:last-of-type {
+  main
+    .embed-container
+    .bottom-container
+    .more-option-data
+    .select-box:last-of-type {
     margin-bottom: 0px;
   }
 }
@@ -974,8 +1032,8 @@ main .embed-container .bottom-container code {
   main .embed-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
   main .embed-container .right-container {
     margin-bottom: 20px;
@@ -986,8 +1044,8 @@ main .embed-container .bottom-container code {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
 }
 
@@ -1038,8 +1096,8 @@ footer .footer-copyrights .programmer-copyright a {
   footer .footer-copyrights .nm-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
   footer .footer-copyrights .nm-container .site-copyrights {
     margin-bottom: 10px;
@@ -1074,7 +1132,10 @@ footer .footer-copyrights .programmer-copyright a {
   width: 100%;
 }
 
-.nm-widget-container .sm-padding-container .widget-selectBox-container .widget-select {
+.nm-widget-container
+  .sm-padding-container
+  .widget-selectBox-container
+  .widget-select {
   padding: 0px 5px;
   height: 38px;
   width: calc(50% - 7px);
@@ -1117,7 +1178,10 @@ footer .footer-copyrights .programmer-copyright a {
   font-size: var(--nm-font);
 }
 
-.nm-widget-container .prayes-time-container .pray-item .pray-name::first-letter {
+.nm-widget-container
+  .prayes-time-container
+  .pray-item
+  .pray-name::first-letter {
   text-transform: uppercase;
 }
 
@@ -1178,14 +1242,14 @@ table tbody tr td.active {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   padding: 25px;
   min-width: 300px;
   max-width: 450px;
   background-color: var(--primary-background-color);
   border-radius: var(--md-border-radius);
   -webkit-box-shadow: 0px 0px 0px 100vh #20202040;
-          box-shadow: 0px 0px 0px 100vh #20202040;
+  box-shadow: 0px 0px 0px 100vh #20202040;
   z-index: 999999;
 }
 
@@ -1476,7 +1540,7 @@ form input[type="submit"] {
   padding: 5px 10px;
   width: calc(33% - 10px);
   background-color: var(--secondary-background-color);
-  font-size: var(--nm-font);
+  font-size: var(--sm-font);
   color: var(--primary-text-color);
   border-radius: var(--md-border-radius);
 }
@@ -1489,7 +1553,7 @@ form input[type="submit"] {
 }
 
 .countries-container .country-item .country-textBox {
-  font-size: var(--nm-font);
+  font-size: var(--sm-font);
   font-weight: 500;
 }
 
@@ -1557,7 +1621,7 @@ form input[type="submit"] {
   top: 50%;
   left: 10px;
   -webkit-transform: translate(0, -50%);
-          transform: translate(0, -50%);
+  transform: translate(0, -50%);
   width: 30px;
   font-size: var(--md-font);
   color: var(--primary-text-color);
@@ -1627,8 +1691,8 @@ form input[type="submit"] {
   .post-show-div {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
   .post-show-div .right-container {
     width: 100%;
