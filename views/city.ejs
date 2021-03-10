@@ -30,8 +30,8 @@
             <div class="section-heading">
               <% if(lang == 'en') {%> Prayer Times In <%= cityLocaleName %>
               <%}else{%> أوقات الصلاة في <%= cityLocaleName %> <%}%>
-            </div> <% if(lang == 'en') {%> Next Pray Will Be  <p class="nextPrayText" style="display: contents;">-</p> Inshallah
-              <%}else{%> الصلاة القادمة ستكون <p class="nextPrayText" style="display: contents;">-</p> ان شاء الله<%}%>
+            </div> <% if(lang == 'en') {%> Next Pray Will Be  <p class="nextPrayText" style="display: contents;">-</p> Inshallah According To <%= cityLocaleName %> City
+              <%}else{%> الصلاة القادمة ستكون <p class="nextPrayText" style="display: contents;">-</p> ان شاء الله حسب توقيت مدينة <%= cityLocaleName %> <%}%>
               
             <div class="row justify-evenly fluid-width">
                           <a href="/dhuha/<%= countryName %>/<%= cityName %>"> <% if(lang == 'en') {%> Dhuha Prayer <%}else{%> صلاة الضحي <%}%></a>
@@ -234,12 +234,20 @@
           </div>
           <script>
             let cityContainer = document.querySelector('.city-container');
-
+if(window.innerWidth < 400){
+              cityContainer.classList.add('column');
+              cityContainer.style.width = '60%'
+            }else{
+              cityContainer.classList.remove('column');
+              cityContainer.style.width = 'fit-content'
+            }
             window.addEventListener('resize',()=>{
 if(window.innerWidth < 400){
               cityContainer.classList.add('column');
+              cityContainer.style.width = '60%'
             }else{
               cityContainer.classList.remove('column');
+              cityContainer.style.width = 'fit-content'
             }
             })
             
