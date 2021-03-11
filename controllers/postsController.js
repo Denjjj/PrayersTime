@@ -4,7 +4,7 @@ const PostSection = require("../models/postSection.js");
 const settings = require("../models/settings.js");
 const View = require("../models/view.js");
 const fetch = require("node-fetch");
-const isLogged = require("./adminController.js");
+const isLogged = require("./adminController.js").isLogged;
 
 // Get User Data
 let userIp = "";
