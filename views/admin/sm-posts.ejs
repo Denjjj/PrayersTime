@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+ 
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center posts-show"
+        >
+          <h2><%= title %></h2>
+    
+          <div class="fluid-container row justify-start wrap">
+            <a
+              href="/admin/add-sm-post"
+              class="add-post-btn row align-center justify-center"
+              >اضافة جديدة</a
+            >
+
+    
+          <% if(smPosts.length != 0) {%>
+          <table>
+            <thead>
+              <tr>
+                <td>العنوان</td>
+                                </td>
+
+                <td>ادارة</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% for( let i = 0;i<smPosts.length;i++ ) {
+                let post = smPosts[i] %>
+              <tr>
+                <td>
+               
+                  <a href="/post/t/<%= post._id %>"><%= post.content.slice(0,40) %></a>
+                  
+                </td>
+
+                <td>
+                  <a href="/admin/edit-sm-post/<%= post._id %>"
+                    >تعديل</a
+                  >
+                  <a href="/admin/delete-sm-post/<%= post._id %>"
+                    >حذف</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <% }else{ %>
+          <div class="msg">لا توجد بيانات</div>
+          <%}%>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

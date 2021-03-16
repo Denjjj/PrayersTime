@@ -10,7 +10,7 @@ const strip_tags = (inp) => {
 const isLogged = (req, res) => {
   if (req.session.userName != undefined && req.url.includes("admin")) {
     if (req.url.includes("login")) {
-      res.redirect("/admin/dashboard", { title: "لوحة التحكم" });
+      res.redirect("/admin/dashboard");
     }
   } else {
     if (req.url.includes("login") == false) {

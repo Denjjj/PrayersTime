@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <%- include('./partials/head') %>
+  <body class="admin-body">
+    <%- include('./partials/header') %>
+    <main>
+      <div class="nm-container">
+        <section
+          class="sm-padding-container column justify-center align-center"
+        >
+          <form
+            action="/admin/edit-sm-post/<%= smPostData._id %>"
+            name="body"
+            method="POST"
+          >
+            <h2><%= title %></h2>
+            <% if(errMsg !== '') { %>
+            <div class="error-msg"><%= errMsg %></div>
+            <% }%>
+            <label>رمز الايقونة</label>
+            <input
+              type="text"
+              name="icon"
+              placeholder="رمز الايقونة"
+              value="<%= smPostData.icon %>"
+            />
+            <label>القائل</label>
+            <input
+              type="text"
+              name="sayer"
+              placeholder="القائل"
+              required
+              value="<%= smPostData.sayer %>"
+            />
+            <label>المحتوي</label>
+            <textarea name="content" placeholder="المحتوي" required cols="30">
+<%= smPostData.content %></textarea
+            >
+            <label>اللغة</label>
+            <select name="lang" class="select-box">
+              <% if(smPostData.lang == 'ar'){ %>
+
+              <option value="ar" selected>عربي</option>
+              <option value="en">انجليزي</option>
+              <% }else{ %>
+
+              <option value="ar">عربي</option>
+              <option value="en" selected>انجليزي</option>
+              <% } %>
+            </select>
+            <input type="submit" value="تعديل" />
+          </form>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

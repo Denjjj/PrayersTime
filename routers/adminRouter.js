@@ -41,8 +41,15 @@ const {
   editDuhaData,
   addPostSectionData,
   deletePost,
+  addSmPostGet,
+  addSmPostPost,
+  editSmPostGet,
+  editSmPostPost,
+  showSmPosts,
+  deleteSmPostGet,
 } = require("../controllers/postsController.js");
 const upload = require("express-fileupload");
+const SmPost = require("../models/smPost.js");
 
 const router = express.Router();
 
@@ -132,6 +139,28 @@ router.get("/admin/delete-post/:postType/:postId", deletePost);
 
 router.get("/admin/posts/:postType", showPosts);
 // End Delete Post
+
+// Add SmPost
+router.get("/admin/add-sm-post", addSmPostGet);
+router.post("/admin/add-sm-post", addSmPostPost);
+
+// Edit SmPost
+router.get("/admin/edit-sm-post/:smPostId", editSmPostGet);
+router.post("/admin/edit-sm-post/:smPostId", editSmPostPost);
+
+// Delete SmPost
+router.get("/admin/delete-sm-post/:smPostId", deleteSmPostGet);
+
+// Show SmPost
+router.get("/admin/sm-posts", showSmPosts);
+
+// SmPostJson
+router.get("/json-sm-posts", (req, res) => {
+  let lang = req.query.lang || "ar";
+  SmPost.find({ lang }).then((results) => {
+    res.json(results);
+  });
+});
 
 // Duha & Istekhara Posts
 router.get("/admin/edit-duha/:postCustom", editDuhaDataShow);

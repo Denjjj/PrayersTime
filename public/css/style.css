@@ -1576,11 +1576,106 @@ form input[type="submit"] {
 .show-more-countries-btn a {
   padding: 10px 15px;
   background-color: var(--primary-green);
-  font-size: var(--md-font);
+  font-size: var(--nm-font);
   font-weight: 500;
   color: #ffffff;
   border-radius: var(--md-border-radius);
   cursor: pointer;
+}
+
+.row-container .row-item {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  width: calc(33% - 10px);
+  background-color: var(--secondary-background-color);
+  font-size: var(--sm-font);
+  color: var(--primary-text-color);
+  border-radius: var(--md-border-radius);
+}
+
+@media (max-width: 780px) {
+  .row-container .row-item {
+    margin-left: 5px;
+  }
+}
+
+.row-container .row-item .row-image {
+  margin-left: 10px;
+  width: 60px;
+  height: 40px;
+  border-radius: var(--sm-border-radius);
+}
+
+.row-container .row-item .row-textBox {
+  font-size: var(--sm-font);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .row-container .row-item {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 460px) {
+  .row-container .row-item {
+    width: 100%;
+  }
+}
+
+.sm-post-container .row-item {
+  padding: 25px 10px !important;
+  position: relative;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  background-color: #e2f4f1 !important;
+  border: 2px solid #c8e6e0;
+}
+
+@media (max-width: 766px) {
+  .sm-post-container .row-item {
+    margin-bottom: 60px;
+  }
+  .sm-post-container .row-item:last-of-type {
+    margin-bottom: 20px;
+  }
+}
+
+.sm-post-container .row-item p {
+  margin-top: 10px;
+  font-size: calc(var(--nm-font) + 1);
+}
+
+.sm-post-container .row-item .btn {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: var(--primary-green);
+  font-size: var(--sm-font);
+  font-weight: 800;
+  color: #ffffff;
+  border-radius: var(--md-border-radius);
+  cursor: pointer;
+}
+
+.sm-post-container .reload-sm-post-btn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #8fcbc0;
+  font-size: var(--md-font);
+  cursor: pointer;
+}
+
+.sm-post-container .row-item .top-icon-container {
+  margin-top: -60px;
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
+  font-size: var(--lg-font);
+  color: #a1dcd1;
+  border-radius: 100px;
+  border: 5px solid #a1dcd1;
 }
 
 .msg {

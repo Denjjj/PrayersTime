@@ -3,6 +3,7 @@ const Post = require("../models/post.js");
 const PostSection = require("../models/postSection.js");
 const settings = require("../models/settings.js");
 const View = require("../models/view.js");
+const SmPost = require("../models/smPost.js");
 const fetch = require("node-fetch");
 const isLogged = require("./adminController.js").isLogged;
 
@@ -553,6 +554,113 @@ const showOnlyPost = (req, res) => {
     });
 };
 
+// Add smPost
+const addSmPostGet = (req, res) => {
+  isLogged(req, res);
+
+  res.render("admin/add-sm-post", {
+    title: `اضافة منشور قصير`,
+    errMsg: ``,
+  });
+};
+const addSmPostPost = (req, res) => {
+  isLogged(req, res);
+  let { icon, sayer, content, lang } = req.body;
+
+  if (strip_tags(content) == "") {
+    res.render("admin/add-sm-post", {
+      title: `اضافة منشور قصير`,
+      errMsg: `برجاء ملئ جميع الحقول`,
+    });
+  } else {
+    let newSmPost = new SmPost({
+      icon,
+      sayer,
+      content,
+      lang,
+    });
+
+    newSmPost.save().then(() => {
+      res.render("admin/add-sm-post", {
+        title: `اضافة منشور قصير`,
+        errMsg: `تم الاضافة بنجاح`,
+      });
+    });
+  }
+};
+
+// Edit smPost
+const editSmPostGet = async (req, res) => {
+  isLogged(req, res);
+
+  let smPostId = req.params.smPostId;
+  let smPostData = await SmPost.findOne({ _id: smPostId });
+
+  res.render("admin/edit-sm-post", {
+    title: `تعديل منشور قصير`,
+    smPostData,
+    errMsg: ``,
+  });
+};
+const editSmPostPost = async (req, res) => {
+  isLogged(req, res);
+  let { icon, sayer, content, lang } = req.body,
+    smPostId = req.params.smPostId,
+    smPostData = await SmPost.findOne({ _id: smPostId }),
+    newSmPostData = {
+      _id: smPostId,
+      icon: icon,
+      sayer: sayer,
+      content: content,
+      lang: lang,
+    };
+
+  if (strip_tags(content) == "") {
+    res.render("admin/edit-sm-post", {
+      title: `تعديل منشور قصير`,
+      smPostData,
+      errMsg: `برجاء ملئ جميع الحقول`,
+    });
+  } else {
+    let newSmPost = {
+      icon,
+      sayer,
+      content,
+      lang,
+    };
+
+    SmPost.findOneAndUpdate({ _id: smPostId }, { $set: newSmPost }).then(() => {
+      res.render("admin/edit-sm-post", {
+        title: `تعديل منشور قصير`,
+        smPostData: newSmPostData,
+        errMsg: `تم التعديل بنجاح`,
+      });
+    });
+  }
+};
+
+// Delete SmPost
+const deleteSmPostGet = async (req, res) => {
+  isLogged(req, res);
+
+  let smPostId = req.params.smPostId;
+
+  SmPost.deleteOne({ _id: smPostId }).then(() => {
+    res.redirect("/admin/sm-posts");
+  });
+};
+
+// Show SmPost
+const showSmPosts = async (req, res) => {
+  isLogged(req, res);
+  let smPosts = await SmPost.find();
+
+  res.render("admin/sm-posts", {
+    title: `المنشورات القصيرة`,
+    smPosts,
+  });
+};
+
 module.exports = {
   showPostForm,
   addPostData,
@@ -568,4 +676,10 @@ module.exports = {
   showClientPosts,
   showTypePosts,
   showOnlyPost,
+  addSmPostGet,
+  addSmPostPost,
+  editSmPostGet,
+  editSmPostPost,
+  showSmPosts,
+  deleteSmPostGet,
 };
