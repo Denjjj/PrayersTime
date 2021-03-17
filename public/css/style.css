@@ -1669,7 +1669,8 @@ form input[type="submit"] {
 
 .sm-post-container .row-item .top-icon-container {
   margin-top: -60px;
-  width: 80px;
+  padding: 10px;
+  width: fit-content;
   height: 80px;
   background-color: #ffffff;
   font-size: var(--lg-font);
