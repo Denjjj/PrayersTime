@@ -9,7 +9,7 @@
       if(lang == 'en') { %>Search a City Name<% }else {%>ابحث عن اسم مدينة<%}%>"
       >
       <i
-        class="fas fa-street-view detect-location"
+        class="fas fa-map-marker-alt detect-location"
         <% if(lang == 'en') {%> style="right: 10px;" <%}%> 
         title="تحديد موقعي - Detect My Location"
       ></i>
@@ -22,9 +22,49 @@
 
   detectLocation.addEventListener("click", () => {
     if (lang == "en") {
-    location.href = `${location.origin}/detect?lang=en`;
+      navigator.geolocation.getCurrentPosition(
+            // (B2) ON SUCCESSFULLY GETTING GPS COORDINATES
+            function (pos) {
+              let longitude = pos.coords.longitude,
+                latitude = pos.coords.latitude;
+
+              location.href = `${location.origin}/detect?lati=${latitude}&long=${longitude}&lang=en`;
+            },
+
+            // (B3) ON FAILING TO GET GPS COORDINATES
+            function (err) {
+              console.log(err);
+            },
+
+            // (B4) GPS OPTIONS
+            {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0,
+            }
+          );
   }else{
-        location.href = `${location.origin}/detect`;
+    navigator.geolocation.getCurrentPosition(
+            // (B2) ON SUCCESSFULLY GETTING GPS COORDINATES
+            function (pos) {
+              let longitude = pos.coords.longitude,
+                latitude = pos.coords.latitude;
+
+              location.href = `${location.origin}/detect?lati=${latitude}&long=${longitude}`;
+            },
+
+            // (B3) ON FAILING TO GET GPS COORDINATES
+            function (err) {
+              console.log(err);
+            },
+
+            // (B4) GPS OPTIONS
+            {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0,
+            }
+          );
   }
   });
 </script>

@@ -21,6 +21,12 @@ const session = require("cookie-session");
 const geopkg = require("geoip-lite");
 const { lookup } = geopkg;
 const requestIp = require("request-ip");
+const NodeGeocoder = require("node-geocoder");
+const options = {
+  provider: "openstreetmap",
+  language: "en",
+};
+const geocoder = NodeGeocoder(options);
 
 const app = express();
 
@@ -96,8 +102,20 @@ app.use(function (req, res, next) {
 });
 
 // Render Home Page
-app.get("/detect", (req, res) => {
-  let langQuery = req.query.lang || "ar";
+app.get("/detect", async (req, res) => {
+  let langQuery = req.query.lang || "ar",
+    lati = req.query.lati,
+    long = req.query.long;
+
+  if (lati && long) {
+    let data = await geocoder.reverse({ lat: lati, lon: long });
+
+    if (langQuery == "en") {
+      res.redirect(`/${data[0].country}/${data[0].city}?lang=en`);
+    } else {
+      res.redirect(`/${data[0].country}/${data[0].city}`);
+    }
+  }
 
   if (backUserData.cityName != "") {
     if (langQuery == "en") {
@@ -336,8 +354,6 @@ app.get("/:countryname/:cityname", (req, res) => {
               .find({ lang: langQuery })
               .then((results) => results[0])
               .then((results) => {
-                console.log("AAAAAAAAAAAAAAAAA");
-
                 res.render("city", {
                   lang: langQuery,
                   title: results.siteTitle,

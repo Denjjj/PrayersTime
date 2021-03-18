@@ -1712,10 +1712,10 @@ form input[type="submit"] {
   z-index: 50;
 }
 
-.manual-container .fa-street-view {
+.manual-container .fa-map-marker-alt {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 5px;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   width: 30px;
