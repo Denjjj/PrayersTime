@@ -7,7 +7,7 @@ async function getPrayersTimes(
   asrMethods = "Standard",
   format = "12h"
 ) {
-  fetch(`${location.origin}/glnglt/${userCityName}/${userCountryName}`)
+  fetch(`https://${location.host}/glnglt/${userCityName}/${userCountryName}`)
     .then((res) => res.json())
     .then((json) => {
       let longitude = json[0].longitude || 21.3891,
@@ -16,7 +16,7 @@ async function getPrayersTimes(
       prayTimes.setMethod(method);
       prayTimes.adjust({ asr: asrMethods });
 
-      let fetchUrl = `http://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}`;
+      let fetchUrl = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}`;
 
       fetch(fetchUrl)
         .then((data) => data.json())
