@@ -71,7 +71,6 @@ let userData = {},
 
 app.use(function (req, res, next) {
   let ip = req.clientIp;
-
   if (ip == "::1" || ip == "::ffff:127.0.0.1") {
     ip = "45.242.76.121";
   }

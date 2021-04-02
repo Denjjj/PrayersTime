@@ -330,7 +330,29 @@ async function getPrayersTimes(
                 higriData = $(".higri-date"),
                 goergianDate = $(".goergian-date"),
                 nextPray = $(".next-pray"),
-                timestampDiv = $(".timestamp-div");
+                timestampDiv = $(".timestamp-div"),
+                facebookSite = $(".facebook-site"),
+                twitterSite = $(".twitter-site");
+
+              facebookSite.setAttribute(
+                "href",
+                `https://www.facebook.com/sharer/sharer.php?u=${
+                  location.origin
+                }/${resultCountryName.replace(
+                  / /g,
+                  "-"
+                )}/${resultCityName.replace(/ /g, "-")}${location.search}`
+              );
+
+              twitterSite.setAttribute(
+                "href",
+                `https://twitter.com/share?url=${
+                  location.origin
+                }/${resultCountryName.replace(
+                  / /g,
+                  "-"
+                )}/${resultCityName.replace(/ /g, "-")}${location.search}`
+              );
 
               let date = new Date()
                   .toLocaleString("en-us", {
