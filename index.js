@@ -8,8 +8,6 @@ const View = require("./models/view.js");
 const City = require("./models/city.js");
 const Country = require("./models/country.js");
 const pkg = require("country-list");
-const countrypkg = require("country-code-lookup");
-const { byIso, byCountry } = countrypkg;
 const countrytwopkg = require("country-codes-list");
 const { customList } = countrytwopkg;
 const { getCode, getName } = pkg;
@@ -249,6 +247,15 @@ app.get("/ccd/:code", (req, res) => {
     res.json(results);
     res.send(results);
   });
+});
+
+// Get Lng & Lat By City & Country Name
+app.get("/glnglt/:city/:country", async (req, res) => {
+  let city = req.params.city,
+    country = req.params.country;
+  let data = await geocoder.geocode({ city, country });
+
+  res.json(data);
 });
 
 // Admin Router

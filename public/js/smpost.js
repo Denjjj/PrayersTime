@@ -7,6 +7,10 @@ window.addEventListener("load", () => {
       return data.json();
     })
     .then((json) => {
+      if (json.length < 2) {
+        smPostContainer.remove();
+      }
+
       let item1 = json[0],
         item2 = json[1];
 

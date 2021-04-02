@@ -16,6 +16,9 @@ headerTitle.addEventListener("click", () => {
 });
 
 navToggle.addEventListener("click", () => {
+  if (lang == "en") {
+    ul.style.right = "50px";
+  }
   navToggle.classList.contains("fa-bars")
     ? ((ul.style.display = `unset`), (ul.style.opacity = `1`))
     : ((ul.style.opacity = `0`), (ul.style.display = `none`)),
@@ -33,7 +36,6 @@ if (lang == "en") {
   $("#azkar a").textContent = "Azkar";
   $("#posts a").textContent = "Posts";
   $("#doua a").textContent = "Doa";
-  $("#dhuha a").textContent = "Dhuha & Elaastkara";
 
   if (location.search == "?lang=en") {
     let aes = $_("a");

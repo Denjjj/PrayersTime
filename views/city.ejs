@@ -6,6 +6,7 @@
           %> <%}%>`;
     });
   </script>
+ <script type="text/javascript" src="/js/PrayTimes.js"></script> 
   <%- include('./partials/head.ejs') %>
 
   <script>
@@ -25,6 +26,7 @@
     <main>
       <%- include('./partials/search.ejs') %>
       <div class="nm-container">
+        <div id="rem_div"></div>
         <section class="sm-padding-container">
           <div class="section-top-container column justify-between align-center">
             <div class="section-heading">
@@ -42,57 +44,64 @@
           <div
             class="prayes-time-container row justify-center align-center nowrap"
           >
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column faj justify-center align-center">
+              <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
               <div class="pray-remain-time">00:00</div>
+</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column sun justify-center align-center">
+               <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
-              <div class="pray-remain-time">00:00</div>
+              <div class="pray-remain-time">00:00</div></div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column duh justify-center align-center">
+               <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
-              <div class="pray-remain-time">00:00</div>
+              <div class="pray-remain-time">00:00</div></div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column asr justify-center align-center">
+               <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
-              <div class="pray-remain-time">00:00</div>
+              <div class="pray-remain-time">00:00</div></div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column mag justify-center align-center">
+               <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
-              <div class="pray-remain-time">00:00</div>
+              <div class="pray-remain-time">00:00</div></div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item column justify-center align-center">
+            <div class="pray-item column ish justify-center align-center">
+               <div class=" column  justify-center align-center">
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
               </div>
-              <div class="pray-remain-time">00:00</div>
+              <div class="pray-remain-time">00:00</div></div>
               <div class="pray-main-time">00:00</div>
             </div>
           </div>
 
-          <div class="pray-item column justify-center align-center next-active-pray" id="18:29">
+          <div class="pray-item column  justify-center align-center next-active-pray">
               <div class="pray-name">-</div>
               <div class="pray-remain-time">-</div>
               <div class="pray-main-time">-</div>
@@ -143,72 +152,60 @@
             <div class="more-option-data row justify-between fluid-container">
               <div class="select-box">
                 <label>طريقة الحساب</label>
-                <select class="select pray-school">
+                <select class="select calc-method">
                   <option value="0" data-en="Shia Ithna-Ansari">
                     اثنا اشهري
                   </option>
                   <option
-                    value="1"
+                    value="Karachi"
                     data-en="University of Islamic Sciences, Karachi"
                   >
                     جامعة العلوم الإسلامية ، كراتشي
                   </option>
-                  <option value="2" data-en="Islamic Society of North America">
+                  <option value="ISNA" data-en="Islamic Society of North America">
                     الجمعية الإسلامية لأمريكا الشمالية
                   </option>
-                  <option value="3" data-en="Muslim World League">
+                  <option value="MWL" selected data-en="Muslim World League">
                     رابطة العالم الإسلامي
                   </option>
                   <option
-                    selected
-                    value="4"
+                    
+                    value="Makkah"
                     data-en="Umm Al-Qura University, Makkah"
                   >
                     جامعة أم القرى ، مكة
                   </option>
                   <option
-                    value="5"
+                    value="Egypt"
                     data-en="Egyptian General Authority of Survey"
                   >
                     الهيئة المصرية العامة للمساحة
                   </option>
                   <option
-                    value="7"
+                    value="Tehran"
                     data-en="Institute of Geophysics, University of Tehran"
                   >
                     معهد الجيوفيزياء ، جامعة طهران
                   </option>
-                  <option value="8" data-en="Gulf Region">الخليج</option>
-                  <option value="9" data-en="Kuwait">الكويت</option>
-                  <option value="10" data-en="Qatar">قطر</option>
-                  <option
-                    value="11"
-                    data-en="Majlis Ugama Islam Singapura, Singapore"
-                  >
-                    مجلس أوجاما إسلام سينجابورا ، سنغافورة
-                  </option>
-                  <option
-                    value="12"
-                    data-en="Union Organization islamic de France"
-                  >
-                    منظمة الاتحاد الإسلامية الفرنسية
-                  </option>
+                 
+             
+               
                 </select>
               </div>
               <div class="select-box">
                 <label>طريقة حساب العصر</label>
-                <select class="select pray-juristic">
-                  <option selected value="0" data-en="Shafi">شافعي</option>
-                  <option value="1" data-en="Hanafi">حنفي</option>
+                <select class="select asr-method">
+                  <option selected value="Standard" data-en="Shafi">شافعي</option>
+                  <option value="Hanafi" data-en="Hanafi">حنفي</option>
                 </select>
               </div>
               <div class="select-box">
                 <label>صيغة الوقت</label>
-                <select class="select pray-time-format">
-                  <option selected value="1" data-en="12 Hour">
+                <select class="select time-format">
+                  <option selected value="12h" data-en="12 Hour">
                     نظام 12 ساعة
                   </option>
-                  <option value="0" data-en="24 Hours">نظام 24 ساعة</option>
+                  <option value="24h" data-en="24 Hours">نظام 24 ساعة</option>
                 </select>
               </div>
             </div>

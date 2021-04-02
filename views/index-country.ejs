@@ -19,7 +19,7 @@
         <section class="sm-padding-container">
           <div class="countries-container row wrap justify-between">
             <%if(countries.length != 0) {countries.forEach(country=>{ %>
-            <div class="row justify-start country-item align-center">
+            <div class="row justify-between country-item align-center">
               <img
                 src="/assets/flags/<% if(country.flagFullName != null || country.flagFullName != undefined){ %>
               <%= country.flagFullName %>

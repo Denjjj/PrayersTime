@@ -1,8 +1,21 @@
 <header>
   <div class="nm-container">
-    <div
+    <div style="
+    margin: auto;
+"
       class="no-rl-padding sm-padding-container <% if(lang == 'en') {%>row-reverse <%}else{%>row <%}%> nowrap justify-between align-center fluid-height"
     >
+    <% if(lang == 'en'){  %>
+<style>
+  body{
+    text-align: left;
+  }
+  .justify-start{
+    justify-content: flex-end;
+  }
+</style>
+
+   <% } %>
       <div class="header-title <% if(lang == 'en') {%>row-reverse <%}else{%>row <%}%> nowrap justify-between align-center">
         <img src="<%= logoDist.replace('/public','') %>" alt="مواقيت الصلاة" />
         <h1 <% if(lang == 'en') {%>
@@ -11,7 +24,7 @@
       </div>
       <nav class="row nowrap justify-between align-center">
         <i class="fas fa-bars navbar-toggle"></i>
-        <ul class="ul row nowrap justify-between">
+        <ul class="ul row nowrap justify-between" <% if(lang=='en'){ %> style='right=50px' <% } %>>
           <li id="azkar"><a href="/posts/0">اذكار</a></li>
           <li id="posts"><a href="/posts/2">مواضيع</a></li>
           <li id="doua"><a href="/posts/1">ادعية</a></li>
