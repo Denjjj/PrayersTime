@@ -338,20 +338,20 @@ async function getPrayersTimes(
                 "href",
                 `https://www.facebook.com/sharer/sharer.php?u=${
                   location.origin
-                }/${resultCountryName.replace(
+                }/${userCountryName.replace(/ /g, "-")}/${userCityName.replace(
                   / /g,
                   "-"
-                )}/${resultCityName.replace(/ /g, "-")}${location.search}`
+                )}${location.search}`
               );
 
               twitterSite.setAttribute(
                 "href",
                 `https://twitter.com/share?url=${
                   location.origin
-                }/${resultCountryName.replace(
+                }/${userCountryName.replace(/ /g, "-")}/${userCityName.replace(
                   / /g,
                   "-"
-                )}/${resultCityName.replace(/ /g, "-")}${location.search}`
+                )}${location.search}`
               );
 
               let date = new Date()
