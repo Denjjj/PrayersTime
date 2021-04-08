@@ -105,13 +105,13 @@ app.get("/detect", async (req, res) => {
     long = req.query.long;
 
   if (lati && long) {
-    let data = await geocoder.reverse({ lat: lati, lon: long });
+    let data = await geocoder.reverse({ lat: lati, lon: long }),
+      city = data[0].city,
+      country = data[0].country;
 
-    if (langQuery == "en") {
-      res.redirect(`/${data[0].country}/${data[0].city}?lang=en`);
-    } else {
-      res.redirect(`/${data[0].country}/${data[0].city}`);
-    }
+    console.log(data);
+
+    res.redirect(`/${country}/${city}?lang=${langQuery}`);
   }
 
   if (backUserData.cityName != "") {
@@ -297,6 +297,7 @@ app.get("/country/:countryName", (req, res) => {
               countryLocalName,
               countryEnName: countryResults[0].en_name,
               countryCode: countryResults[0].countryCode,
+
               cities: citiesResults,
             });
           }
@@ -370,6 +371,8 @@ app.get("/:countryname/:cityname", (req, res) => {
                   countryName,
                   countryLocaleName,
                   cityLocaleName,
+                  method: countryResults[0].method || 3,
+                  asr_method: countryResults[0].asr_method || "Shafi",
                   allcities,
                   keyword: results.siteKeywords,
                   getLocation: userData,

@@ -153,51 +153,95 @@
               <div class="select-box">
                 <label>طريقة الحساب</label>
                 <select class="select calc-method">
-                  <option value="0" data-en="Shia Ithna-Ansari">
+                  
+                  <option value="0"
+                  class='method-option' data-en="Shia Ithna-Ansari">
                     اثنا اشهري
                   </option>
                   <option
-                    value="Karachi"
+                    value="1"
+                    class='method-option'
                     data-en="University of Islamic Sciences, Karachi"
                   >
                     جامعة العلوم الإسلامية ، كراتشي
                   </option>
-                  <option value="ISNA" data-en="Islamic Society of North America">
+                  <option value="2"
+                  class='method-option' data-en="Islamic Society of North America">
                     الجمعية الإسلامية لأمريكا الشمالية
                   </option>
-                  <option value="MWL" selected data-en="Muslim World League">
+                  <option value="3"
+                  class='method-option' data-en="Muslim World League">
                     رابطة العالم الإسلامي
                   </option>
                   <option
                     
-                    value="Makkah"
+                    value="4"
+                    class='method-option'
                     data-en="Umm Al-Qura University, Makkah"
                   >
                     جامعة أم القرى ، مكة
                   </option>
                   <option
-                    value="Egypt"
+                    value="5"
+                    class='method-option'
                     data-en="Egyptian General Authority of Survey"
                   >
                     الهيئة المصرية العامة للمساحة
                   </option>
                   <option
-                    value="Tehran"
+                    value="7"
+                    class='method-option'
                     data-en="Institute of Geophysics, University of Tehran"
                   >
                     معهد الجيوفيزياء ، جامعة طهران
                   </option>
                  
-             
-               
+             <option
+                    value="8"
+                    class='method-option'
+                    data-en="Gulf Region"
+                  >
+                    الخليج
+                  </option>
+                 
+                        <option
+                    value="9"
+                    class='method-option'
+                    data-en="Kuwait"
+                  >
+                    الكويت
+                  </option>
+                       <option
+                    value="10"
+                    class='method-option'
+                    data-en="Qatar"
+                  >
+                    قطر
+                  </option>
                 </select>
+                <script>
+                  let optionMethods= document.querySelectorAll('.method-option')
+                optionMethods.forEach(method=>{
+                  if(method.value == '<%= method %>'){
+                    method.setAttribute('selected','true')
+                  }
+                })
+                </script>
               </div>
               <div class="select-box">
                 <label>طريقة حساب العصر</label>
                 <select class="select asr-method">
-                  <option selected value="Standard" data-en="Shafi">شافعي</option>
-                  <option value="Hanafi" data-en="Hanafi">حنفي</option>
+                  <option  value="0" data-en="Shafi" class="asr-method-option">شافعي</option>
+                  <option value="1" data-en="Hanafi" class="asr-method-option">حنفي</option>
                 </select>
+                  <script>
+                  let optionMethods= document.querySelectorAll('.asr-method-option')
+                optionMethods.forEach(method=>{
+                  if(method.value == '<%= asr_method %>'){
+                    method.setAttribute('selected','true')
+                  }
+                })
+                </script>
               </div>
               <div class="select-box">
                 <label>صيغة الوقت</label>

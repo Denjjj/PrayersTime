@@ -1,43 +1,64 @@
 import { $, $_ } from "../aan/js/main.js";
 
 // getUserLocation
+// Code CopyRights To prayer-now.com
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
 
-async function getPrayersTimes(
-  method = "MWL",
-  asrMethods = "Standard",
-  format = "12h"
-) {
+function to12(clock) {
+  let result = `${clock.split(":")[0]}:${clock.split(":")[1]} AM`;
+
+  if (parseInt(clock.split(":")[0]) > 12) {
+    result = `${clock.split(":")[0] - 12}:${clock.split(":")[1]} PM`;
+  } else if (parseInt(clock.split(":")[0]) == 0) {
+    result = `12:${clock.split(":")[1]} AM`;
+  }
+
+  return result;
+}
+
+async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
   fetch(`${location.origin}/glnglt/${userCityName}/${userCountryName}`)
     .then((res) => res.json())
     .then((json) => {
       let longitude = json[0].longitude || 21.3891,
         latitude = json[0].latitude || 39.8579;
 
-      prayTimes.setMethod(method);
-      prayTimes.adjust({ asr: asrMethods });
-
-      let fetchUrl = `${location.protocol}//api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}`;
+      let fetchUrl = `${location.protocol}//api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}&school=${asr_method}`;
 
       fetch(fetchUrl)
         .then((data) => data.json())
-        .then((json) => {
-          let jdata = json.data,
-            meta = jdata.meta;
+        .then((pjson) => {
+          let jdata = pjson.data,
+            meta = jdata.meta,
+            prayersData = jdata.timings;
 
-          // Code CopyRights To prayer-now.com
-          function addZero(i) {
-            if (i < 10) {
-              i = "0" + i;
-            }
-            return i;
+          let data = {
+            fajr: prayersData.Fajr,
+            sunrise: prayersData.Sunrise,
+            dhuhr: prayersData.Dhuhr,
+            asr: prayersData.Asr,
+            maghrib: prayersData.Maghrib,
+            isha: prayersData.Isha,
+          };
+
+          if (format == "12h") {
+            data = {
+              fajr: to12(prayersData.Fajr),
+              sunrise: to12(prayersData.Sunrise),
+              dhuhr: to12(prayersData.Dhuhr),
+              asr: to12(prayersData.Asr),
+              maghrib: to12(prayersData.Maghrib),
+              isha: to12(prayersData.Isha),
+            };
           }
 
           function currentSecondsF() {
-            var d = new Date(
-              new Date().toLocaleString("en-us", {
-                timeZone: `${meta.timezone}`,
-              })
-            );
+            var d = new Date();
 
             var h = d.getHours();
             var m = d.getMinutes();
@@ -49,13 +70,15 @@ async function getPrayersTimes(
           function prayerSeconds() {
             var currentSeconds = currentSecondsF();
 
-            var times = prayTimes.getTimes(
-              new Date(),
-              [latitude, longitude],
-              "auto",
-              "auto",
-              "24h"
-            );
+            var times = {
+              fajr: prayersData.Fajr,
+              sunrise: prayersData.Sunrise,
+              dhuhr: prayersData.Dhuhr,
+              asr: prayersData.Asr,
+              maghrib: prayersData.Maghrib,
+              isha: prayersData.Isha,
+            };
+
             prayerSeconds = [];
             var holder = times.fajr.split(":");
             var holder_sec =
@@ -263,14 +286,7 @@ async function getPrayersTimes(
 
           // Set Active Pray
           function setActivePray() {
-            let data = prayTimes.getTimes(
-                new Date(),
-                [latitude, longitude],
-                "auto",
-                "auto",
-                format
-              ),
-              prayNames = {
+            let prayNames = {
                 fajr: lang == "en" ? "Fajr" : "الفجر",
                 sunrise: lang == "en" ? "Sunrise" : "الشروق",
                 dhuhr: lang == "en" ? "Dhuhr" : "الظهر",

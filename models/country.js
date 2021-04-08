@@ -6,6 +6,8 @@ const countrySchema = new Schema({
   en_name: { type: String, required: true },
   ar_name: { type: String, required: true },
   flagFullName: { type: String, required: true },
+  asr_method: { type: String, required: false },
+  method: { type: String, required: false },
 });
 
 const Country = mongoose.model("coutries", countrySchema);
