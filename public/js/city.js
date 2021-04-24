@@ -58,7 +58,11 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
           }
 
           function currentSecondsF() {
-            var d = new Date();
+            var d = new Date(
+              new Date().toLocaleString("en-us", {
+                timeZone: `${meta.timezone}`,
+              })
+            );
 
             var h = d.getHours();
             var m = d.getMinutes();
@@ -120,7 +124,7 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
               if (index == 0) {
                 //fajr
                 // console.log("fajr");
-                var remaing = prayerSeconds[0] + (86400 - currentSeconds);
+                var remaing = prayerSeconds[0] + currentSeconds;
                 // console.log(remaing);
                 var h = addZero(Math.floor(remaing / 3600));
                 var m = addZero(Math.floor((remaing - h * 3600) / 60));
@@ -159,7 +163,6 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
                 //dhur
                 // console.log("dh");
                 var remaing = prayerSeconds[2] - currentSeconds;
-                // console.log(remaing);
                 var h = addZero(Math.floor(remaing / 3600));
                 var m = addZero(Math.floor((remaing - h * 3600) / 60));
                 var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
@@ -252,6 +255,7 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
 
               return 0;
             } else if (currentSeconds <= prayerSeconds[0]) {
+              // console.log("here");
               var remaingTime = [];
               remaing = prayerSeconds[0] - currentSeconds;
               remaingTime[2] = remaing / 3600; // hours
