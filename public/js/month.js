@@ -186,12 +186,72 @@ getUserLocation.then((res) => {
                 <td class="active">${prayDate}</td>
                 <td class="active">${prayHigri}</td>
                 <td class="active">${finalDayName}</td>
-                <td>${timings.Fajr.split(" ")[0]}</td>
-                <td>${timings.Sunrise.split(" ")[0]}</td>
-                <td>${timings.Dhuhr.split(" ")[0]}</td>
-                <td>${timings.Asr.split(" ")[0]}</td>
-                <td>${timings.Maghrib.split(" ")[0]}</td>
-                <td>${timings.Isha.split(" ")[0]}</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Fajr.split(" ")[0]) > 12
+                      ? `${timings.Fajr.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Fajr.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Fajr.split(" ")[0].split(":")[0]}:${
+                          timings.Fajr.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Fajr.split(" ")[0]
+                }</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Sunrise.split(" ")[0]) > 12
+                      ? `${timings.Sunrise.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Sunrise.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Sunrise.split(" ")[0].split(":")[0]}:${
+                          timings.Sunrise.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Sunrise.split(" ")[0]
+                }</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Dhuhr.split(" ")[0]) > 12
+                      ? `${timings.Dhuhr.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Dhuhr.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Dhuhr.split(" ")[0].split(":")[0]}:${
+                          timings.Dhuhr.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Dhuhr.split(" ")[0]
+                }</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Asr.split(" ")[0]) > 12
+                      ? `${timings.Asr.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Asr.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Asr.split(" ")[0].split(":")[0]}:${
+                          timings.Asr.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Asr.split(" ")[0]
+                }</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Maghrib.split(" ")[0]) > 12
+                      ? `${timings.Maghrib.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Maghrib.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Maghrib.split(" ")[0].split(":")[0]}:${
+                          timings.Maghrib.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Maghrib.split(" ")[0]
+                }</td>
+                <td>${
+                  format == "12h"
+                    ? parseInt(timings.Isha.split(" ")[0]) > 12
+                      ? `${timings.Isha.split(" ")[0].split(":")[0] - 12}:${
+                          timings.Isha.split(" ")[0].split(":")[1]
+                        } PM`
+                      : `${timings.Isha.split(" ")[0].split(":")[0]}:${
+                          timings.Isha.split(" ")[0].split(":")[1]
+                        } AM`
+                    : timings.Isha.split(" ")[0]
+                }</td>
               </tr>`;
         }
       };
