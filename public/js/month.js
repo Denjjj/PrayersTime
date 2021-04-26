@@ -153,12 +153,23 @@ getUserLocation.then((res) => {
 
         for (let i = 0; i < prayesData.length; i++) {
           let pray = prayesTime[i],
-            prayDataPiece = prayesTime[i],
+            prayDataPiece = prayesData[i],
             prayDate = prayDataPiece.date.gregorian.date,
             prayHigri = prayDataPiece.date.hijri.date,
             prayArDay = prayDataPiece.date.hijri.weekday.ar,
             prayEnDay = prayDataPiece.date.gregorian.weekday.en,
             finalDayName;
+
+          if (format == "12h") {
+            prayDate =
+              parseInt(prayDate.split(" ")[0]) > 12
+                ? `${prayDate.split(" ")[0].split(":")[0] - 12}:${
+                    prayDate.split(" ")[0].split(":")[1]
+                  } PM`
+                : `${prayDate.split(" ")[0].split(":")[0]}:${
+                    prayDate.split(" ")[0].split(":")[1]
+                  } AM`;
+          }
 
           let timings = prayDataPiece.timings;
 
