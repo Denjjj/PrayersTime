@@ -7,7 +7,7 @@ let getUserLocation = new Promise((resolve) => {
   userData.cityName != undefined || userData.countryName != undefined
     ? resolve(userData)
     : fetch(
-        `https://api.ipinfodb.com/v3/ip-city/?key=${locationApiKey}&format=json`
+        `${location.protocol}//api.ipinfodb.com/v3/ip-city/?key=${locationApiKey}&format=json`
       )
         .then((res) => res.json())
         .then((json) => {
@@ -27,20 +27,18 @@ let getUserLocation = new Promise((resolve) => {
 getUserLocation.then((res) => {
   let prayesData = {},
     getPrayData = (
-      school = 4,
-      juristic = 0,
-      timeformat = 0,
+      school = location.search.split("&")[0].split("=")[1],
+      juristic = location.search.split("&")[1].split("=")[1],
+      format = location.search.split("&")[2].split("=")[1],
       city = null,
-      country = null,
-      latitude = null,
-      longitude = null
+      country = null
     ) => {
       return new Promise((resolve) => {
         (async () => {
           let userLocInfKey = `037e8a09bd12404c82361f76572d7363`;
 
           let fetchLatLong = fetch(
-            `https://api.opencagedata.com/geocode/v1/json?q=${city}+${country}&key=${userLocInfKey}`
+            `${location.protocol}//api.opencagedata.com/geocode/v1/json?q=${city}+${country}&key=${userLocInfKey}`
           );
           fetchLatLong = await fetchLatLong.then((result) => result.json());
           let fetchlat, fetchlng;
@@ -53,7 +51,7 @@ getUserLocation.then((res) => {
             let newKey = `a60de551c8a14d2dba7bf42c6e8ed311`;
 
             fetchLatLong = fetch(
-              `https://api.opencagedata.com/geocode/v1/json?q=${city}+${country}&key=${newKey}`
+              `${location.protocol}//api.opencagedata.com/geocode/v1/json?q=${city}+${country}&key=${newKey}`
             );
             fetchLatLong = await fetchLatLong.then((result) => result.json());
 
@@ -77,7 +75,7 @@ getUserLocation.then((res) => {
             (fetchlat = fetchLatLong.lat), (fetchlng = fetchLatLong.lng);
           }
 
-          let url = `https://api.aladhan.com/v1/calendar?latitude=${fetchlat}&longitude=${fetchlng}&method=${school}&school=${juristic}`;
+          let url = `${location.protocol}//api.aladhan.com/v1/calendar?latitude=${fetchlat}&longitude=${fetchlng}&method=${school}&school=${juristic}`;
 
           fetch(url)
             .then((res) => res.json())
@@ -91,7 +89,7 @@ getUserLocation.then((res) => {
 
   let secondAction = false;
 
-  let prayInnerFunc = (res, timeformat) => {
+  let prayInnerFunc = (res, format) => {
     let getThePrayes = () => {
       let resultCityName = userData.cityName,
         todayNum = new Date().getDate() - 1,
@@ -104,7 +102,7 @@ getUserLocation.then((res) => {
         prayesTime.pop(), prayesTime.splice(7, 2), prayesTime.splice(4, 1);
       });
 
-      if (timeformat == 1) {
+      if (format == 1) {
         for (let i = 0; i < prayesTime.length; i++) {
           let time = prayesTime[i][1];
           prayesTime[i][1] =
@@ -190,9 +188,9 @@ getUserLocation.then((res) => {
   };
   // Get Pray Data
   getPrayData(
-    4,
-    0,
-    1,
+    location.search.split("&")[0].split("=")[1],
+    location.search.split("&")[1].split("=")[1],
+    location.search.split("&")[2].split("=")[1],
     userData.cityName,
     userData.countryName,
     userData.latitude,

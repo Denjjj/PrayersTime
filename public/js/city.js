@@ -352,7 +352,13 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
                 nextPray = $(".next-pray"),
                 timestampDiv = $(".timestamp-div"),
                 facebookSite = $(".facebook-site"),
-                twitterSite = $(".twitter-site");
+                twitterSite = $(".twitter-site"),
+                monthPrayesBtn = $(".month-prayes-btn");
+
+              monthPrayesBtn.setAttribute(
+                "href",
+                `/month/${userCountryName}/${userCityName}?method=${method}&asr_method=${asr_method}&format=${format}`
+              );
 
               facebookSite.setAttribute(
                 "href",
