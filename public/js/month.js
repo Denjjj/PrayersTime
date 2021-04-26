@@ -103,6 +103,8 @@ getUserLocation.then((res) => {
       });
 
       if (format == "12h") {
+        console.log("hihih");
+
         for (let i = 0; i < prayesTime.length; i++) {
           let time = prayesTime[i][1];
           prayesTime[i][1] =
