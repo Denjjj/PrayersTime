@@ -171,6 +171,8 @@ getUserLocation.then((res) => {
                   } AM`;
           }
 
+          console.log(prayDate);
+
           let timings = prayDataPiece.timings;
 
           if (lang == "en") {
