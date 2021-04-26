@@ -94,7 +94,7 @@ getUserLocation.then((res) => {
       let resultCityName = userData.cityName,
         todayNum = new Date().getDate() - 1,
         prayesData = res.data,
-        prayesTime = res.data;
+        prayesTime = prayesData;
 
       prayesTime.forEach((prayTime) => {
         prayesTime = prayTime.timings;
@@ -103,8 +103,6 @@ getUserLocation.then((res) => {
       });
 
       if (format == "12h") {
-        console.log("hihih");
-
         for (let i = 0; i < prayesTime.length; i++) {
           let time = prayesTime[i][1];
           prayesTime[i][1] =
@@ -155,7 +153,7 @@ getUserLocation.then((res) => {
 
         for (let i = 0; i < prayesData.length; i++) {
           let pray = prayesTime[i],
-            prayDataPiece = prayesData[i],
+            prayDataPiece = prayesTime[i],
             prayDate = prayDataPiece.date.gregorian.date,
             prayHigri = prayDataPiece.date.hijri.date,
             prayArDay = prayDataPiece.date.hijri.weekday.ar,
