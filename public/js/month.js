@@ -160,19 +160,6 @@ getUserLocation.then((res) => {
             prayEnDay = prayDataPiece.date.gregorian.weekday.en,
             finalDayName;
 
-          if (format == "12h") {
-            prayDate =
-              parseInt(prayDate.split(" ")[0]) > 12
-                ? `${prayDate.split(" ")[0].split(":")[0] - 12}:${
-                    prayDate.split(" ")[0].split(":")[1]
-                  } PM`
-                : `${prayDate.split(" ")[0].split(":")[0]}:${
-                    prayDate.split(" ")[0].split(":")[1]
-                  } AM`;
-          }
-
-          console.log(prayDate);
-
           let timings = prayDataPiece.timings;
 
           if (lang == "en") {
@@ -186,7 +173,7 @@ getUserLocation.then((res) => {
                 <td class="active">${prayDate}</td>
                 <td class="active">${prayHigri}</td>
                 <td class="active">${finalDayName}</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Fajr.split(" ")[0]) > 12
                       ? `${timings.Fajr.split(" ")[0].split(":")[0] - 12}:${
@@ -197,7 +184,7 @@ getUserLocation.then((res) => {
                         } AM`
                     : timings.Fajr.split(" ")[0]
                 }</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Sunrise.split(" ")[0]) > 12
                       ? `${timings.Sunrise.split(" ")[0].split(":")[0] - 12}:${
@@ -208,7 +195,7 @@ getUserLocation.then((res) => {
                         } AM`
                     : timings.Sunrise.split(" ")[0]
                 }</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Dhuhr.split(" ")[0]) > 12
                       ? `${timings.Dhuhr.split(" ")[0].split(":")[0] - 12}:${
@@ -219,7 +206,7 @@ getUserLocation.then((res) => {
                         } AM`
                     : timings.Dhuhr.split(" ")[0]
                 }</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Asr.split(" ")[0]) > 12
                       ? `${timings.Asr.split(" ")[0].split(":")[0] - 12}:${
@@ -230,7 +217,7 @@ getUserLocation.then((res) => {
                         } AM`
                     : timings.Asr.split(" ")[0]
                 }</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Maghrib.split(" ")[0]) > 12
                       ? `${timings.Maghrib.split(" ")[0].split(":")[0] - 12}:${
@@ -241,7 +228,7 @@ getUserLocation.then((res) => {
                         } AM`
                     : timings.Maghrib.split(" ")[0]
                 }</td>
-                <td>${
+                <td style='direction: ltr;'>${
                   format == "12h"
                     ? parseInt(timings.Isha.split(" ")[0]) > 12
                       ? `${timings.Isha.split(" ")[0].split(":")[0] - 12}:${
