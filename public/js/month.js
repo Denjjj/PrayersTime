@@ -27,9 +27,9 @@ let getUserLocation = new Promise((resolve) => {
 getUserLocation.then((res) => {
   let prayesData = {},
     getPrayData = (
-      school = location.search.split("&")[0].split("=")[1],
-      juristic = location.search.split("&")[1].split("=")[1],
-      format = location.search.split("&")[2].split("=")[1],
+      school = 0,
+      juristic = 4,
+      format = "12h",
       city = null,
       country = null
     ) => {
@@ -102,7 +102,7 @@ getUserLocation.then((res) => {
         prayesTime.pop(), prayesTime.splice(7, 2), prayesTime.splice(4, 1);
       });
 
-      if (format == 1) {
+      if (format == "12h") {
         for (let i = 0; i < prayesTime.length; i++) {
           let time = prayesTime[i][1];
           prayesTime[i][1] =
