@@ -198,6 +198,6 @@ getUserLocation.then((res) => {
     userData.latitude,
     userData.longitude
   ).then((json) => {
-    prayInnerFunc(json, 1);
+    prayInnerFunc(json, location.search.split("&")[2].split("=")[1]);
   });
 });
