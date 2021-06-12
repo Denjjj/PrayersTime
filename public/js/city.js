@@ -1,7 +1,7 @@
 import { $, $_ } from "../aan/js/main.js";
 
 // getUserLocation
-// Code CopyRights To prayer-now.com
+// Some Code CopyRights To prayer-now.com
 function addZero(i) {
   if (i < 10) {
     i = "0" + i;
@@ -395,8 +395,9 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
                     timeZone: `${meta.timezone}`,
                   })
                   .split(",")[0],
-                nextPrayText = $(".active-pray").firstElementChild
-                  .firstElementChild.textContent;
+                nextPrayText =
+                  $(".active-pray").firstElementChild.firstElementChild
+                    .textContent;
 
               nextPrayTextDiv.textContent = nextPrayText;
               dateClock.lastChild.textContent = date;
@@ -404,6 +405,13 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
               goergianDate.lastChild.textContent = goergian;
               nextPray.lastChild.textContent = nextPrayText;
               timestampDiv.lastChild.textContent = meta.timezone;
+
+              $(".section-add-code").setAttribute(
+                "href",
+                `${location.origin}/embed/${userData.cityName}/${
+                  userData.countryName
+                }${lang == "en" ? "?lang=en" : ""}`
+              );
 
               if (lang == "en") {
                 dateClock.firstElementChild.textContent = "Clock:";
@@ -420,13 +428,6 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
                 $(".more-option-btn").textContent = "More Options";
                 $(".section-add-code").textContent = "Embed to your Site";
                 $(".month-prayes-btn").textContent = "Month Prayer Times";
-
-                $(".section-add-code").setAttribute(
-                  "href",
-                  `${location.origin}/embed/${userData.cityName}/${
-                    userData.countryName
-                  }${lang == "en" ? "?lang=en" : ""}`
-                );
 
                 let allEnData = $_("option");
                 allEnData.forEach((option) => {

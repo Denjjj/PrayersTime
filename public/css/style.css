@@ -489,6 +489,10 @@ main section .prayes-time-container .pray-item .pray-main-time {
   }
 }
 
+main section .prayes-time-container .pray-item.active-pray {
+  display: flex !important;
+}
+
 @media (min-width: 530px) {
   main section .prayes-time-container .pray-item.active-pray {
     width: 220px;

@@ -19,7 +19,9 @@
         desc = `<%= desc %>`,
         email = `<%= email %>`,
         logoDist = `<%= logoDist %>`,
-        keyword = `<%= keyword %>`;
+        keyword = `<%= keyword %>`,
+        userCountryName = `<%= countryName  %>`,
+        userCityName = `<%= cityName  %>`;
     </script>
     <link rel="stylesheet" href="/aan/css/all.css" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -54,17 +56,20 @@
         <section class="fluid-container">
           <div class="section-top-container row justify-between align-center">
             <div class="section-heading" style="color: #ffffff">
-              أوقات الصلاة في -
+              <% if(lang == 'en') {%> Prayer Times In <%= cityLocaleName %>
+              <%}else{%> أوقات الصلاة في <%= cityLocaleName %> <%}%>
             </div>
             <p class="manual-location-btn" style="color: #ffffff">
-              <% if(params.lang == 'ar') {%> تحديد يدوي للموقع<%}else{%> Choose
+              <% if(params.lang != 'en') {%> تحديد يدوي للموقع<%}else{%> Choose
               Location <% } %>
             </p>
           </div>
           <div
             class="prayes-time-container row justify-center align-center nowrap"
           >
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize faj column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
@@ -72,7 +77,9 @@
               <div class="pray-remain-time">00:00</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize sun column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
@@ -80,7 +87,9 @@
               <div class="pray-remain-time">00:00</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize duh column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
@@ -88,7 +97,9 @@
               <div class="pray-remain-time">00:00</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize asr column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
@@ -96,7 +107,9 @@
               <div class="pray-remain-time">00:00</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize mag column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____
@@ -104,7 +117,9 @@
               <div class="pray-remain-time">00:00</div>
               <div class="pray-main-time">00:00</div>
             </div>
-            <div class="pray-item no-resize column justify-center align-center">
+            <div
+              class="pray-item no-resize ish column justify-center align-center"
+            >
               <div class="pray-name">
                 <p>متبقي علي صلاة</p>
                 ____

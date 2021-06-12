@@ -2,450 +2,474 @@ import { $, $_ } from "../aan/js/main.js";
 
 // getUserLocation
 
-let getUserLocation = new Promise((resolve) => {
-  resolve(userData);
-});
+// getUserLocation
+// Some Code CopyRights To prayer-now.com
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
 
-getUserLocation.then((res) => {
-  let prayesData = {},
-    getPrayData = (school = 4, juristic = 0, timeformat = 0, city, country) => {
-      return new Promise((resolve) => {
-        (() => {
-          let url = `https://api.aladhan.com/v1/calendarByCity?city=${city}&country=${country}&method=${juristic}&school=${school}`;
+function to12(clock) {
+  let result = `${clock.split(":")[0]}:${clock.split(":")[1]} AM`;
 
-          fetch(url)
-            .then((res) => res.json())
-            .then((json) => {
-              prayesData = { ...json };
-              resolve(prayesData);
-            });
-        })();
-      });
-    };
+  if (parseInt(clock.split(":")[0]) > 12) {
+    result = `${clock.split(":")[0] - 12}:${clock.split(":")[1]} PM`;
+  } else if (parseInt(clock.split(":")[0]) == 0) {
+    result = `12:${clock.split(":")[1]} AM`;
+  }
 
-  let secondAction = false;
+  return result;
+}
 
-  let prayInnerFunc = (res, timeformat) => {
-    let getThePrayes = () => {
-      let resultCityName = userData.cityName,
-        resultCountryName = userData.countryName,
-        todayNum = new Date().getDate() - 1,
-        prayesTime = res.data[todayNum].timings;
+async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
+  fetch(`${location.origin}/glnglt/${userCityName}/${userCountryName}`)
+    .then((res) => res.json())
+    .then((json) => {
+      let longitude = json[0].longitude || 21.3891,
+        latitude = json[0].latitude || 39.8579;
 
-      prayesTime = Object.entries(prayesTime);
-      prayesTime.pop(), prayesTime.splice(7, 2), prayesTime.splice(4, 1);
+      let fetchUrl = `${location.protocol}//api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}&school=${asr_method}`;
 
-      if (timeformat == 1) {
-        for (let i = 0; i < prayesTime.length; i++) {
-          let time = prayesTime[i][1];
-          prayesTime[i][1] =
-            parseInt(prayesTime[i][1].split(" ")[0]) > 12
-              ? `${prayesTime[i][1].split(" ")[0].split(":")[0] - 12}:${
-                  prayesTime[i][1].split(" ")[0].split(":")[1]
-                } PM`
-              : `${prayesTime[i][1].split(" ")[0].split(":")[0]}:${
-                  prayesTime[i][1].split(" ")[0].split(":")[1]
-                } AM`;
-        }
-      } else {
-        for (let i = 0; i < prayesTime.length; i++) {
-          let time = prayesTime[i][1];
-          prayesTime[i][1] = `${prayesTime[i][1].split(" ")[0].split(":")[0]}:${
-            prayesTime[i][1].split(" ")[0].split(":")[1]
-          }`;
-        }
-      }
+      fetch(fetchUrl)
+        .then((data) => data.json())
+        .then((pjson) => {
+          let jdata = pjson.data,
+            meta = jdata.meta,
+            prayersData = jdata.timings;
 
-      let timeStamp = res.data[todayNum].date.timestamp;
+          let data = {
+            fajr: prayersData.Fajr,
+            sunrise: prayersData.Sunrise,
+            dhuhr: prayersData.Dhuhr,
+            asr: prayersData.Asr,
+            maghrib: prayersData.Maghrib,
+            isha: prayersData.Isha,
+          };
 
-      timeStamp =
-        new Date(new Date().getTime() - timeStamp).getHours() -
-        new Date(new Date().getTime() - timeStamp).getUTCHours();
+          if (format == "12h") {
+            data = {
+              fajr: to12(prayersData.Fajr),
+              sunrise: to12(prayersData.Sunrise),
+              dhuhr: to12(prayersData.Dhuhr),
+              asr: to12(prayersData.Asr),
+              maghrib: to12(prayersData.Maghrib),
+              isha: to12(prayersData.Isha),
+            };
+          }
 
-      let timezone = res.data[todayNum].meta.timezone;
-
-      let resultsTime = new Date(
-        `${new Date().toLocaleString("en-us", {
-          timeZone: `${timezone}`,
-        })}`
-      );
-
-      // Praye Name In Arabic
-      let prayesNamesAr = {
-        sunrise: `الشروق`,
-        fajr: `الفجر`,
-        dhuhr: `الظهر`,
-        asr: `العصر`,
-        maghrib: `المغرب`,
-        isha: `العشاء`,
-      };
-      if (userData.lang == "ar") {
-        // Replace English Prayes Names With Arabic One
-        for (let i = 0; i < prayesTime.length; i++) {
-          let prayNameAr = prayesTime[i][0].toLowerCase();
-
-          prayNameAr = prayNameAr.replace(
-            `${prayNameAr}`,
-            `${prayesNamesAr[prayNameAr]}`
-          );
-        }
-      }
-      let date = new Date(
-        `${new Date().toLocaleString("en-us", {
-          timeZone: `${timezone}`,
-        })}`
-      );
-
-      let hr =
-          date.getHours().toString().length == 1
-            ? parseInt(`0${date.getHours()}`)
-            : date.getHours(),
-        min =
-          date.getMinutes().toString().length == 1
-            ? parseInt(`0${date.getMinutes()}`)
-            : date.getMinutes(),
-        hrMin24 = `${hr}:${min}`,
-        hrMin12 = date.toLocaleDateString("en-US", {
-          hour12: true,
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-
-      // Add Prayes Data
-
-      let addPrayes = () => {
-        let prayItem = $_(".pray-item"),
-          prayName = $_(".pray-name");
-
-        // Add Name And Time To Pray Items
-        for (let i = 0; i < prayesTime.length; i++) {
-          let prayNameAr = prayesTime[i][0].toLowerCase(),
-            prayTime = prayesTime[i][1];
-          if (userData.lang == "ar") {
-            prayNameAr = prayNameAr.replace(
-              `${prayNameAr}`,
-              `${prayesNamesAr[prayNameAr]}`
+          function currentSecondsF() {
+            var d = new Date(
+              new Date().toLocaleString("en-us", {
+                timeZone: `${meta.timezone}`,
+              })
             );
+
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var seconds = d.getSeconds();
+            var currentSeconds = h * 3600 + m * 60 + seconds;
+            return currentSeconds;
           }
 
-          let idValue =
-            timeformat == 1
-              ? prayTime.split(" ").length == 2 &&
-                prayTime.split(" ")[1].toLowerCase() == "pm"
-                ? `${parseInt(prayTime.split(" ")[0].split(":")[0]) + 12}:${
-                    prayTime.split(" ")[0].split(":")[1]
-                  }`
-                : `${parseInt(prayTime.split(" ")[0].split(":")[0])}:${
-                    prayTime.split(" ")[0].split(":")[1]
-                  }`
-              : `${parseInt(prayTime.split(" ")[0].split(":")[0])}:${
-                  prayTime.split(" ")[0].split(":")[1]
-                }`;
+          function prayerSeconds() {
+            var currentSeconds = currentSecondsF();
 
-          prayItem[i].setAttribute("id", `${idValue}`);
-          prayItem[i].firstElementChild.textContent = prayNameAr;
-
-          /* Set Main Pray Time */
-          prayItem[i].lastElementChild.textContent = `${
-            prayTime.split(":")[0]
-          }:${prayTime.split(":")[1]}`;
-        }
-      };
-      addPrayes();
-
-      // Know The Next Pray
-      let getNextPray = () => {
-        let prayItem = $_(".pray-item");
-
-        // Get The Time From Id
-        let timeArray = [],
-          remainedHoursArray = [],
-          remainedMinsArray = [],
-          remainedTimeArray = [];
-
-        // Get The Hours & Minutes
-        for (let i = 0; i < prayItem.length; i++) {
-          timeArray[i] = prayItem[i].getAttribute("id");
-          remainedHoursArray[i] = prayItem[i].getAttribute("id").split(":")[0];
-          remainedMinsArray[i] = prayItem[i].getAttribute("id").split(":")[1];
-
-          remainedTimeArray[i] = `${
-            prayItem[i].getAttribute("id").split(":")[0]
-          }:${prayItem[i].getAttribute("id").split(":")[1]}:00`;
-        }
-
-        function diffdownTimer(mainDate) {
-          var today = new Date(
-            `${new Date().toLocaleString("en-us", {
-              timeZone: `${timezone}`,
-            })}`
-          );
-
-          var date =
-            today.getFullYear() +
-            "-" +
-            (today.getMonth() + 1) +
-            "-" +
-            today.getDate();
-
-          var dateTime = date + " " + mainDate;
-
-          let difference = new Date(dateTime) - today;
-          let remaining = "حان الان موعد الاذان";
-
-          if (difference > 0) {
-            const parts = {
-              hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-              minutes: Math.floor((difference / 1000 / 60) % 60),
-              seconds: Math.floor((difference / 1000) % 60),
+            var times = {
+              fajr: prayersData.Fajr,
+              sunrise: prayersData.Sunrise,
+              dhuhr: prayersData.Dhuhr,
+              asr: prayersData.Asr,
+              maghrib: prayersData.Maghrib,
+              isha: prayersData.Isha,
             };
 
-            remaining = Object.keys(parts)
-              .map((part) => {
-                return `${parts[part]} ${part}`;
-              })
-              .join(" ");
-          } else {
-            const parts = {
-              hours: `${Math.floor(
-                ((difference / (1000 * 60 * 60)) % 24) + 24
-              )}:`,
-              minutes: `${Math.floor((difference / 1000 / 60) % 60) + 60}:`,
-              seconds: Math.floor((difference / 1000) % 60) + 60,
-            };
+            prayerSeconds = [];
+            var holder = times.fajr.split(":");
+            var holder_sec =
+              parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[0] = holder_sec;
 
-            remaining = Object.keys(parts)
-              .map((part) => {
-                return `${parts[part]}`;
-              })
-              .join("");
-          }
+            // prayerSeconds = [];
+            var holder = times.sunrise.split(":");
+            holder_sec = parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[1] = holder_sec;
 
-          return difference;
-        }
-        // Get The Diffrence Between Them
-        let remainingTimeArray = [];
+            // prayerSeconds = [];
+            var holder = times.dhuhr.split(":");
+            holder_sec = parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[2] = holder_sec;
 
-        for (let i = 0; i < remainedTimeArray.length; i++) {
-          let time = remainedTimeArray[i];
+            // prayerSeconds = [];
+            var holder = times.asr.split(":");
+            holder_sec = parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[3] = holder_sec;
 
-          diffdownTimer(time) < 0
-            ? (remainingTimeArray[i] = Infinity)
-            : (remainingTimeArray[i] = diffdownTimer(time));
-        }
+            // prayerSeconds = [];
+            var holder = times.maghrib.split(":");
+            holder_sec = parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[4] = holder_sec;
 
-        let everyIsInfinity = remainingTimeArray.every((time) => {
-          return time == Infinity;
-        });
+            // prayerSeconds = [];
+            var holder = times.isha.split(":");
+            holder_sec = parseInt(holder[0]) * 3600 + parseInt(holder[1]) * 60;
+            prayerSeconds[5] = holder_sec;
 
-        function countdownTimer(nextItem = null, mainDate) {
-          var today = new Date(
-            `${new Date().toLocaleString("en-us", {
-              timeZone: `${timezone}`,
-            })}`
-          );
-          var date =
-            today.getFullYear() +
-            "-" +
-            (today.getMonth() + 1) +
-            "-" +
-            today.getDate();
-          var dateTime = date + " " + mainDate;
+            var index = checkCloserPrayer(currentSeconds, prayerSeconds);
+            // console.log(index);
 
-          let difference = new Date(dateTime) - today;
-          let remaining = "موعد الاذان",
-            remainingText =
-              lang == "en"
-                ? (remaining = "Azan Time")
-                : (remaining = "موعد الاذان");
-          remainingText = remaining;
+            if (typeof index != "undefinded") {
+              var remainig_str = "";
+              var next_salah = "";
 
-          if (difference >= 0 && everyIsInfinity == false) {
-            const parts = {
-              hours: `${Math.floor((difference / (1000 * 60 * 60)) % 24)}:`,
-              minutes: `${Math.floor((difference / 1000 / 60) % 60)}:`,
-              seconds: Math.floor((difference / 1000) % 60),
-            };
+              if (index == 0) {
+                //fajr
+                // console.log("fajr");
+                var remaing = prayerSeconds[0] - currentSeconds;
+                // console.log(prayerSeconds[0], currentSeconds);
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Fajr" : "الفجر";
+                next_salah = `<div class="pray-name"> ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".faj").classList.add("active-pray");
+              } else if (index == 1) {
+                //sunrise
+                // console.log("sunrise");
+                var remaing = prayerSeconds[1] - currentSeconds;
+                // console.log(remaing);
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Sunrise" : "الشروق";
+                next_salah = `<div class="pray-name">  ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".sun").classList.add("active-pray");
+              } else if (index == 2) {
+                //dhur
+                // console.log("dh");
+                var remaing = prayerSeconds[2] - currentSeconds;
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Duhr" : "الظهر";
+                next_salah = `<div class="pray-name"> ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".duh").classList.add("active-pray");
+              } else if (index == 3) {
+                //asr
+                // console.log("asr");
+                var remaing = prayerSeconds[3] - currentSeconds;
+                // console.log(remaing);
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Asr" : "العصر";
+                next_salah = `<div class="pray-name">  ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".asr").classList.add("active-pray");
+              } else if (index == 4) {
+                //maghrib
+                // console.log("maghrib");
+                var remaing = prayerSeconds[4] - currentSeconds;
+                // console.log(remaing);
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Maghrib" : "المغرب";
+                next_salah = `<div class="pray-name">  ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".mag").classList.add("active-pray");
+              } else if (index == 5) {
+                //isha
+                // console.log("isha");
+                var remaing = prayerSeconds[5] - currentSeconds;
+                // console.log(remaing);
+                var h = addZero(Math.floor(remaing / 3600));
+                var m = addZero(Math.floor((remaing - h * 3600) / 60));
+                var s = addZero(Math.floor(remaing - h * 3600 - m * 60));
+                var pname = lang == "en" ? "Isha" : "العشاء";
+                next_salah = `<div class="pray-name">  ${pname} </div>`;
+                if (h != 0) {
+                  remainig_str = h + ":" + m + ":" + s;
+                } else {
+                  remainig_str = m + ":" + s;
+                }
+                if ($(".active-pray") != null) {
+                  $(".active-pray").classList.remove("active-pray");
+                }
+                $(".ish").classList.add("active-pray");
+              }
 
-            remaining = Object.keys(parts)
-              .map((part) => {
-                return `${parts[part]}`;
-              })
-              .join("");
-
-            nextItem.firstElementChild.nextElementSibling.innerHTML = remaining;
-
-            if (
-              nextItem.firstElementChild.nextElementSibling.innerHTML ==
-              remainingText
-            ) {
-              location.href = location.href;
+              $(".active-pray").firstElementChild.innerHTML =
+                next_salah +
+                `<div class="pray-remain-time">${remainig_str}</div>`;
             }
-          } else if (everyIsInfinity == true || difference < 0) {
-            const parts = {
-              hours: `${Math.floor(
-                ((difference / (1000 * 60 * 60)) % 24) + 24
-              )}:`,
-              minutes: `${Math.floor((difference / 1000 / 60) % 60) + 60}:`,
-              seconds: Math.floor((difference / 1000) % 60) + 60,
-            };
-
-            remaining = Object.keys(parts)
-              .map((part) => {
-                return `${parts[part]}`;
-              })
-              .join("");
-
-            nextItem.firstElementChild.nextElementSibling.innerHTML = remaining;
           }
-        }
 
-        let nextPrayTime = Math.min(...remainingTimeArray),
-          nextPrayIndex = remainingTimeArray.findIndex(
-            (i) => i == nextPrayTime
-          );
+          function checkCloserPrayer(currentSeconds, prayerSeconds) {
+            var remaing;
+            if (currentSeconds >= prayerSeconds[5]) {
+              var remaingTime = [];
+              remaing = prayerSeconds[0] + (86400 - currentSeconds);
+              remaingTime[2] = remaing / 3600; // hours
+              remaing = remaing - remaingTime[2] * 3600;
+              remaingTime[1] = remaing / 60; // minutes
+              remaing = remaing - remaingTime[1] * 60;
+              remaingTime[0] = remaing; // seconds
 
-        // Set Next Pray Item
-        let nextPrayItem = prayItem[nextPrayIndex];
-        nextPrayItem.classList.add("active-pray");
-        nextPrayTime = nextPrayItem.getAttribute("id");
+              return 0;
+            } else if (currentSeconds <= prayerSeconds[0]) {
+              // console.log("here");
+              var remaingTime = [];
+              remaing = prayerSeconds[0] - currentSeconds;
+              remaingTime[2] = remaing / 3600; // hours
+              remaing = remaing - remaingTime[2] * 3600;
+              remaingTime[1] = remaing / 60; // minutes
+              remaing = remaing - remaingTime[1] * 60;
+              remaingTime[0] = remaing; // seconds
 
-        countdownTimer(nextPrayItem, nextPrayTime);
+              return 0;
+            } else {
+              for (var i = 0; i < 6; i++) {
+                if (
+                  currentSeconds >= prayerSeconds[i] &&
+                  currentSeconds < prayerSeconds[i + 1]
+                ) {
+                  var remaingTime = [];
+                  remaing = prayerSeconds[i + 1] - currentSeconds;
+                  remaingTime[2] = remaing / 3600;
+                  remaing = remaing - remaingTime[2] * 3600;
+                  remaingTime[1] = remaing / 60;
+                  remaing = remaing - remaingTime[1] * 60;
+                  remaingTime[0] = remaing;
+                  return i + 1;
+                  // return prayerSeconds[i+1];
+                }
+              }
+              // console.log(prayerSeconds);
+            }
+          }
 
-        nextPrayItem.firstElementChild.nextElementSibling.innerHTML ==
-        "موعد الاذان"
-          ? getNextPray()
-          : "";
+          prayerSeconds();
 
-        secondAction == false
-          ? setInterval(() => {
-              countdownTimer(nextPrayItem, nextPrayTime);
-            }, 1000)
-          : "";
-      };
-      getNextPray();
+          // Set Active Pray
+          function setActivePray() {
+            let prayNames = {
+                fajr: lang == "en" ? "Fajr" : "الفجر",
+                sunrise: lang == "en" ? "Sunrise" : "الشروق",
+                dhuhr: lang == "en" ? "Dhuhr" : "الظهر",
+                asr: lang == "en" ? "Asr" : "العصر",
+                maghrib: lang == "en" ? "Maghrib" : "المغرب",
+                isha: lang == "en" ? "Isha" : "العشاء",
+              },
+              prayItems = $_(".pray-item");
 
-      // Passing Data To Website
-      let sectionHeading = $(".section-heading");
+            for (let i = 0; i < prayItems.length; i++) {
+              let item = prayItems[i];
 
-      // Set SectionHead Text
-      sectionHeading.textContent = `${resultCityName.replace(/-/g, " ")}`;
+              let prayName = item.firstElementChild.firstElementChild,
+                mainTime = item.lastElementChild;
 
-      // Set Date Section Data
-      let clock =
-          timeformat == 0
-            ? resultsTime.toLocaleDateString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })
-            : resultsTime.toLocaleDateString("en-US", {
-                hour12: true,
-                hour: "2-digit",
-                minute: "2-digit",
-              }),
-        higri = resultsTime.toLocaleDateString("ar-SA", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-        goergian = resultsTime.toLocaleDateString("ar-EG", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-        dateClock = $(".date-clock") != null ? $(".date-clock").lastChild : "",
-        higriDate = $(".higri-date") != null ? $(".higri-date").lastChild : "",
-        goergianDate =
-          $(".goergian-date") != null ? $(".goergian-date").lastChild : "";
-    };
-    getThePrayes();
+              if (item.classList.contains("faj")) {
+                prayName.textContent = prayNames.fajr;
+                mainTime.textContent = data.fajr;
+              } else if (item.classList.contains("sun")) {
+                prayName.textContent = prayNames.sunrise;
+                mainTime.textContent = data.sunrise;
+              } else if (item.classList.contains("duh")) {
+                prayName.textContent = prayNames.dhuhr;
+                mainTime.textContent = data.dhuhr;
+              } else if (item.classList.contains("asr")) {
+                prayName.textContent = prayNames.asr;
+                mainTime.textContent = data.asr;
+              } else if (item.classList.contains("mag")) {
+                prayName.textContent = prayNames.maghrib;
+                mainTime.textContent = data.maghrib;
+              } else if (item.classList.contains("ish")) {
+                prayName.textContent = prayNames.isha;
+                mainTime.textContent = data.isha;
+              }
+            }
+          }
+          setActivePray();
 
-    // Get getCountryCities
-  };
+          // Set Next Active Pray Div
+          function nextActivePrayDiv() {
+            let activePray = $(".active-pray"),
+              nextActivePray = $(".next-active-pray"),
+              nextPrayName = nextActivePray.firstElementChild,
+              nextRemainTime = nextActivePray.children[1],
+              nextMainTime = nextActivePray.lastElementChild;
+            // Set Data
+            nextPrayName.textContent =
+              activePray.firstElementChild.firstElementChild.textContent;
+            nextRemainTime.textContent =
+              activePray.firstElementChild.children[1].textContent;
+            nextMainTime.textContent = activePray.lastElementChild.textContent;
 
-  // Get Pray Data
-  getPrayData(
-    userData.school,
-    userData.juristic,
-    userData.timeformat,
-    userData.cityName,
-    userData.countryName
-  ).then((json) => {
-    prayInnerFunc(json, userData.timeformat);
-  });
+            // Set Meta Data After Prayers Times
+            function setMetaData() {
+              let nextPrayTextDiv = $(".nextPrayText"),
+                dateClock = $(".date-clock"),
+                higriData = $(".higri-date"),
+                goergianDate = $(".goergian-date"),
+                nextPray = $(".next-pray"),
+                timestampDiv = $(".timestamp-div"),
+                facebookSite = $(".facebook-site"),
+                twitterSite = $(".twitter-site"),
+                monthPrayesBtn = $(".month-prayes-btn");
 
-  let manualDetect = $(".manual-detect"),
-    manualLocationBtn = $(".manual-location-btn"),
-    manualLocationCountry = $(".manual-location-country"),
-    manualLocationCity = $(".manual-location-city");
+              monthPrayesBtn.setAttribute(
+                "href",
+                `/month/${userCountryName}/${userCityName}?method=${method}&asr_method=${asr_method}&format=${format}`
+              );
 
-  manualLocationBtn.addEventListener("click", () => {
-    let alertContainer = $(".alert-container"),
-      alertText = $(".alert-text");
-    alertContainer.style.display = "unset";
+              facebookSite.setAttribute(
+                "href",
+                `https://www.facebook.com/sharer/sharer.php?u=${
+                  location.origin
+                }/${userCountryName.replace(/ /g, "-")}/${userCityName.replace(
+                  / /g,
+                  "-"
+                )}${location.search}`
+              );
 
-    let getCountryCities = () => {
-      // Fetch Countries
-      let countries = new Promise((resolve) => {
-        fetch(`${location.origin}/json/countries-ar.json`)
-          .then((res) => res.json())
-          .then((json) => resolve(json));
-      });
+              twitterSite.setAttribute(
+                "href",
+                `https://twitter.com/share?url=${
+                  location.origin
+                }/${userCountryName.replace(/ /g, "-")}/${userCityName.replace(
+                  / /g,
+                  "-"
+                )}${location.search}`
+              );
 
-      countries.then((json) => {
-        let countries = json;
+              let date = new Date()
+                  .toLocaleString("en-us", {
+                    timeZone: `${meta.timezone}`,
+                  })
+                  .split(",")[1],
+                higri = new Date()
+                  .toLocaleString(lang == "en" ? "en-sa" : "ar-sa", {
+                    timeZone: `${meta.timezone}`,
+                  })
+                  .split(" ")[0],
+                goergian = new Date()
+                  .toLocaleString("en-us", {
+                    timeZone: `${meta.timezone}`,
+                  })
+                  .split(",")[0],
+                nextPrayText =
+                  $(".active-pray").firstElementChild.firstElementChild
+                    .textContent;
 
-        for (let country in countries) {
-          let countryArr = countries[country];
+              nextPrayTextDiv.textContent = nextPrayText;
+              dateClock.lastChild.textContent = date;
+              higriData.lastChild.textContent = higri;
+              goergianDate.lastChild.textContent = goergian;
+              nextPray.lastChild.textContent = nextPrayText;
+              timestampDiv.lastChild.textContent = meta.timezone;
 
-          manualLocationCountry.innerHTML += `<option value="${countryArr.en_name}">${countryArr.en_name}</option>`;
-        }
+              $(".section-add-code").setAttribute(
+                "href",
+                `${location.origin}/embed/${userData.cityName}/${
+                  userData.countryName
+                }${lang == "en" ? "?lang=en" : ""}`
+              );
 
-        // Get Cities By Country
-        manualLocationCountry.addEventListener("change", () => {
-          let country = manualLocationCountry.value;
-          // Fetch Cities
-          let cities = new Promise((resolve) => {
-            fetch(`${location.origin}/json/cities.json`)
-              .then((res) => res.json())
-              .then((json) => resolve(json));
-          }).catch(() => {
-            manualLocationCity.innerHTML =
-              "<option>لا توجد بيانات خاصة بهذه الدولة</option>";
-          });
+              if (lang == "en") {
+                dateClock.firstElementChild.textContent = "Clock:";
+                dateClock.classList.remove("row-reverse");
 
-          cities.then((citiesJson) => {
-            // Add Cities To Cities Section
-            let cities = citiesJson[country];
-            manualLocationCity.innerHTML = "";
+                higriData.firstElementChild.textContent = "Higri:";
+                nextPray.firstElementChild.textContent = "Next Pray:";
+                goergianDate.firstElementChild.textContent = "Date:";
+                nextPray.firstElementChild.textContent = "Next Pray:";
+                timestampDiv.firstElementChild.textContent = ":Timestamp";
 
-            let getCities = cities.forEach((city) => {
-              manualLocationCity.innerHTML += `<option value="${city}">${city}</option>`;
-            });
-            getCities;
+                // More Options
 
-            !getCities ? console.log("NO") : getCities;
-          });
+                $(".more-option-btn").textContent = "More Options";
+                $(".section-add-code").textContent = "Embed to your Site";
+                $(".month-prayes-btn").textContent = "Month Prayer Times";
+
+                let allEnData = $_("option");
+                allEnData.forEach((option) => {
+                  if (option.getAttribute("data-en") != null) {
+                    option.textContent = option.getAttribute("data-en");
+                  }
+                });
+
+                $(
+                  ".more-option-data"
+                ).firstElementChild.firstElementChild.textContent =
+                  "Calculation Method";
+                $(
+                  ".more-option-data"
+                ).firstElementChild.nextElementSibling.firstElementChild.textContent =
+                  "Asr Method";
+                $(
+                  ".more-option-data"
+                ).lastElementChild.firstElementChild.textContent =
+                  "Time Format";
+
+                $(".share-tag").textContent = "Share";
+              }
+            }
+            setMetaData();
+          }
+          nextActivePrayDiv();
         });
-      });
-    };
-    getCountryCities();
-  });
+    });
+}
 
-  manualDetect.addEventListener("click", () => {
-    location.href = `${location.origin}/widget/${userData.school}/${
-      userData.juristic
-    }/${userData.timeformat}/${manualLocationCity.value.replace(
-      " ",
-      "-"
-    )}/${manualLocationCountry.value.replace(" ", "-")}`;
-  });
-});
+getPrayersTimes();
+
+setInterval(() => {
+  let calcMethod = $(".calc-method"),
+    asrMethod = $(".asr-method"),
+    timeFormat = $(".time-format");
+
+  getPrayersTimes(calcMethod.value, asrMethod.value, timeFormat.value);
+}, 1000);
 
 $("#close-alert").addEventListener("click", () => {
   $(".alert-container").style.display = "none";
