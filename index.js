@@ -33,6 +33,7 @@ app.use(
     secret: "secret-key",
     resave: false,
     saveUninitialized: false,
+    httpOnly: true,
   })
 );
 
