@@ -81,6 +81,6 @@ let searchBox = document.querySelector(".manual-location-btn"),
     }
   };
 
-searchBox.addEventListener("keyup", () => {
+searchBox.addEventListener("input", () => {
   searchFunc(searchBox.value);
 });
