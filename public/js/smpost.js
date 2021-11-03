@@ -68,7 +68,7 @@ window.addEventListener("load", () => {
     });
 });
 
-let shareBtns = document.querySelectorAll(".share-btn");
+var shareBtns = document.querySelectorAll(".share-btn");
 
 shareBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -85,7 +85,7 @@ shareBtns.forEach((btn) => {
   });
 });
 
-let reloadBtns = document.querySelectorAll(".reload-sm-post-btn");
+var reloadBtns = document.querySelectorAll(".reload-sm-post-btn");
 reloadBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     fetch(`${origin}/json-sm-posts?lang=${lang}`)

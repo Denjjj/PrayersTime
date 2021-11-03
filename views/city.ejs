@@ -232,8 +232,8 @@
                   <option value="1" data-en="Hanafi" class="asr-method-option">حنفي</option>
                 </select>
                   <script>
-                  let optionMethods= document.querySelectorAll('.asr-method-option')
-                optionMethods.forEach(method=>{
+                  let asroptionMethods= document.querySelectorAll('.asr-method-option')
+                asroptionMethods.forEach(method=>{
                   if(method.value == '<%= asr_method %>'){
                     method.setAttribute('selected','true')
                   }

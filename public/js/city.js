@@ -115,16 +115,16 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
             prayerSeconds[5] = holder_sec;
 
             var index = checkCloserPrayer(currentSeconds, prayerSeconds);
-            // console.log(index);
 
             if (typeof index != "undefinded") {
               var remainig_str = "";
               var next_salah = "";
 
+
               if (index == 0) {
                 //fajr
                 // console.log("fajr");
-                var remaing = prayerSeconds[0] - currentSeconds;
+                var remaing = 86400 - currentSeconds + prayerSeconds[0] ;
                 // console.log(prayerSeconds[0], currentSeconds);
                 var h = addZero(Math.floor(remaing / 3600));
                 var m = addZero(Math.floor((remaing - h * 3600) / 60));
@@ -244,17 +244,20 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
 
           function checkCloserPrayer(currentSeconds, prayerSeconds) {
             var remaing;
+            // console.log(currentSeconds, prayerSeconds);
             if (currentSeconds >= prayerSeconds[5]) {
+              // console.log(1);
               var remaingTime = [];
-              remaing = prayerSeconds[0] + (86400 - currentSeconds);
+              remaing = 86400 - currentSeconds + prayerSeconds[0];
               remaingTime[2] = remaing / 3600; // hours
               remaing = remaing - remaingTime[2] * 3600;
               remaingTime[1] = remaing / 60; // minutes
               remaing = remaing - remaingTime[1] * 60;
               remaingTime[0] = remaing; // seconds
-
+              
               return 0;
             } else if (currentSeconds <= prayerSeconds[0]) {
+              // console.log(2);
               // console.log("here");
               var remaingTime = [];
               remaing = prayerSeconds[0] - currentSeconds;
@@ -266,6 +269,7 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
 
               return 0;
             } else {
+              // console.log(3);
               for (var i = 0; i < 6; i++) {
                 if (
                   currentSeconds >= prayerSeconds[i] &&
