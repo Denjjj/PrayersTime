@@ -124,7 +124,11 @@ async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
               if (index == 0) {
                 //fajr
                 // console.log("fajr");
-                var remaing = 86400 - currentSeconds + prayerSeconds[0] ;
+                if(currentSeconds >= prayerSeconds[0]){
+                  var remaing = 86400 - currentSeconds + prayerSeconds[0] ;
+                }else{
+                var remaing = prayerSeconds[0] - currentSeconds ;
+                }
                 // console.log(prayerSeconds[0], currentSeconds);
                 var h = addZero(Math.floor(remaing / 3600));
                 var m = addZero(Math.floor((remaing - h * 3600) / 60));
