@@ -22,7 +22,7 @@ function to12(clock) {
 }
 
 async function getPrayersTimes(method = "MWL", asr_method = 0, format = "12h") {
-  fetch(`${location.protocol}//${location.host}/glnglt/${userCityName}/${userCountryName}`)
+  fetch(`${location.origin}/glnglt/${userCityName}/${userCountryName}`)
     .then((res) => res.json())
     .then((json) => {
       let longitude = json[0].longitude || 21.3891,
