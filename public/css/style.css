@@ -60,6 +60,7 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   background-color: var(--secondary-background-color);
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
