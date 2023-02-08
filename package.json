@@ -22,6 +22,7 @@
     "express-fileupload": "^1.4.0",
     "geoip-country": "^4.1.43",
     "geoip-lite": "^1.4.7",
+    "geoip-lite-updated": "^1.4.4",
     "jsdom": "^16.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.7.3",
