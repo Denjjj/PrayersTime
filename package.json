@@ -39,5 +39,8 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": "14.20.1"
   }
 }
