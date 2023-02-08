@@ -208,19 +208,18 @@ app.get("/cct/:cName", (req, res) => {
 
     City.find({
       [theLangSearch]: { $regex: searchQuery, $options: "mi" },
-    })
-      .then((results) => {
-        let data = [];
+    }).then((results) => {
+      let data = [];
 
-        Object.values(results).forEach((results) => {
-          data.push(results);
-        });
-
-        data.reverse();
-
-        res.json(data);
-        res.send(data);
+      Object.values(results).forEach((results) => {
+        data.push(results);
       });
+
+      data.reverse();
+
+      res.json(data);
+      res.send(data);
+    });
   } else {
     if (getCode(req.params.cName) == null) {
       if (customList(req.params.cName) != undefined) {
